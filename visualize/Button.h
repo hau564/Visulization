@@ -24,15 +24,22 @@ public:
 
 class Button {
 public:
-	void create(const sf::Vector2f pos, sf::Vector2f size, Button4Faces states, const std::string &strText, int textSize = 0);
+	Button() {};
+	void create(const sf::Vector2f pos, sf::Vector2f size, Button4Faces states, const std::string strText, int textSize = 0);
 	int run(sf::RenderWindow &window, sf::Event event);
-	void draw(sf::RenderWindow& window);
-	void resetState();
 
-private:
+	bool isPressed();
+	bool isFocused();
+	void resetState();
+	std::string getLabel();
+	
 	enum StateId {normal = 0, focused = 1, pressed = 2, disabled = 3};
+
+	const void draw(sf::RenderWindow& window) const;
+
 	int state = normal; // 0 1 2 3 : normal focused pressed disabled
 	sf::RectangleShape faces[4];
 	sf::Text text;
+
 	sf::Font font;
 };

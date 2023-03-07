@@ -1,11 +1,16 @@
 #include "Visualize.h"
 
+Taskbar task;
+
+void initVariables() {
+    task.create(layout::taskbar::pos, layout::taskbar::blockSize, layout::taskbar::dropBlockSize, style::taskbar::blockStyle::faces, style::taskbar::dropStyle::faces, layout::taskbar::allTasks);
+}
+    
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(style::Width, style::Height), "Visualize");
 
-    Button butt;
-    butt.create(sf::Vector2f(200, 100), sf::Vector2f(500, 100), style::button::allFaces, "cth", 50);
+    initVariables();
 
     while (window.isOpen())
     {
@@ -17,12 +22,12 @@ int main()
                 window.close();
             }
 
-            if (butt.run(window, event)) std::cout << "bo dua thoi\n";
+            task.run(window, event);
         }
 
         window.clear(style::backgroundColor);
 
-        butt.draw(window);
+        task.draw(window);
 
         window.display();
     }

@@ -9,32 +9,82 @@ namespace style {
 
 	sf::Color backgroundColor = sf::Color::White;
 
-	sf::Font font;
-	void init() {
-		font.loadFromFile("font/arial.ttf");
-	}
+
 	namespace button {
 		ButtonFace normal{
-			1,
+			2,
 			sf::Color::White,
 			sf::Color::Black
 		};
 		ButtonFace focused{
-			1,
-			sf::Color::Green,
+			3,
+			sf::Color::White,
 			sf::Color::Black
 		};
 		ButtonFace pressed{
-			1,
-			sf::Color::Red,
+			4,
+			sf::Color::White,
 			sf::Color::Black
 		};
 		ButtonFace disabled{
-			1,
+			2,
 			sf::Color::Transparent,
 			sf::Color::Black
 		};
 
-		Button4Faces allFaces{ normal, focused, pressed, disabled };
+		Button4Faces faces{ normal, focused, pressed, disabled };
+	}
+
+
+	namespace taskbar {
+		namespace blockStyle {
+			ButtonFace normal{
+				1,
+				sf::Color::White,
+				sf::Color::Black
+			};
+			ButtonFace focused{
+				1,
+				sf::Color::Green,
+				sf::Color::Black
+			};
+			ButtonFace pressed{
+				1,
+				sf::Color::Red,
+				sf::Color::Black
+			};
+			ButtonFace disabled{
+				1,
+				sf::Color::Transparent,
+				sf::Color::Black
+			};
+
+			Button4Faces faces{ normal, focused, pressed, disabled };
+		}
+
+		namespace dropStyle {
+			ButtonFace normal{
+				1,
+				sf::Color::White,
+				sf::Color::Black
+			};
+			ButtonFace focused{
+				2,
+				sf::Color::Green,
+				sf::Color::Black
+			};
+			ButtonFace pressed{
+				1,
+				sf::Color::Red,
+				sf::Color::Black
+			};
+			ButtonFace disabled{
+				1,
+				sf::Color::Transparent,
+				sf::Color::Black
+			};
+
+			Button4Faces faces{ normal, focused, pressed, disabled };
+		}
 	}
 };

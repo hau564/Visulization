@@ -5,4 +5,7 @@
 #include<SFML/Window.hpp>
 
 #include "Style.h"
+#include "Layout.h"
 #include "Button.h"
+#include "DropdownBox.h"
+#include "Taskbar.h"
