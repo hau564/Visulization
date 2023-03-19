@@ -1,9 +1,16 @@
 #include "Visualize.h"
 
-Taskbar task;
+sf::RectangleShape functionWindow;
+Taskbar structures;
 
 void initVariables() {
-    task.create(layout::taskbar::pos, layout::taskbar::blockSize, layout::taskbar::dropBlockSize, style::taskbar::blockStyle::faces, style::taskbar::dropStyle::faces, layout::taskbar::allTasks);
+    functionWindow.setPosition(layout::functionWindow::pos);
+    functionWindow.setSize(layout::functionWindow::size);
+    functionWindow.setFillColor(sf::Color::White);
+    functionWindow.setOutlineThickness(1);
+    functionWindow.setOutlineColor(sf::Color::Black);
+
+    structures.create(layout::structuresBar::pos, layout::structuresBar::blockSize, style::button::faces, layout::structuresBar::labels, layout::structuresBar::direction, layout::structuresBar::charSize);
 }
     
 int main()
@@ -22,12 +29,14 @@ int main()
                 window.close();
             }
 
-            task.run(window, event);
+            std::cout << structures.run(window, event) << std::endl;
         }
 
         window.clear(style::backgroundColor);
 
-        task.draw(window);
+        window.draw(functionWindow);
+        
+        structures.draw(window);
 
         window.display();
     }

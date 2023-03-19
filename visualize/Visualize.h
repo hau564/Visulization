@@ -8,4 +8,5 @@
 #include "Layout.h"
 #include "Button.h"
 #include "DropdownBox.h"
+#include "MenuBar.h"
 #include "Taskbar.h"

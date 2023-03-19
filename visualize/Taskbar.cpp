@@ -1,40 +1,34 @@
 #include "Taskbar.h"
 
-void Taskbar::create(sf::Vector2f pos, sf::Vector2f blockSize, sf::Vector2f dropSize, Button4Faces blockStyle, Button4Faces dropStyle, const std::vector<std::vector<std::string>> strings)
-{
-	int dropBoxCount = strings.size();
-	Taskbar::dropdownBoxes.assign(dropBoxCount, DropdownBox());
-	for (int i = 0; i < dropBoxCount; ++i) {
-		Taskbar::dropdownBoxes[i].create(sf::Vector2f(pos.x + blockSize.x * i, pos.y), blockSize, dropSize, blockStyle, strings[i]);
+void Taskbar::create(sf::Vector2f pos, sf::Vector2f size, Button4Faces style, std::vector<std::string> labels, int _w, int charSize) {
+	int labelCount = labels.size();
+
+	w = _w;
+	std::cout << dir[w] << " " << dir[w + 1] << std::endl;
+	
+	buttons.assign(labelCount, Button());
+	for (int i = 0; i < labelCount; ++i) {
+		buttons[i].create(sf::Vector2f(pos.x + size.x * i * dir[w], pos.y + size.y * i * dir[w + 1]), size, style, labels[i], Button::OnOffMode, charSize);
 	}
 }
 
 std::string Taskbar::run(sf::RenderWindow& window, sf::Event event)
 {
-	std::string stringPressed = "none";
-	for (DropdownBox& drop : dropdownBoxes) {
-		std::string status = drop.run(window, event);
-		if (status != drop.labelButton.getLabel())
-			stringPressed = status;
-	}
-
-	anyDropped = false;
-	for (DropdownBox& drop : dropdownBoxes)
-		anyDropped |= drop.dropped;
-
-	if (anyDropped) {
-		for (DropdownBox& drop : dropdownBoxes) {
-			if (drop.labelButton.state > 0) {
-				for (DropdownBox& drop : dropdownBoxes) drop.disDropped();
-				drop.onDropped();
+	std::string ans = "none";
+	for (int i = 0; i < (int)buttons.size(); ++i) {
+		if (buttons[i].run(window, event) == Button::pressed) {
+			ans = buttons[i].getLabel();
+			for (int j = 0; j < (int)buttons.size(); ++j) {
+				if (i != j) {
+					buttons[j].resetState();
+				}
 			}
 		}
 	}
-
-	return stringPressed;
+	return ans;
 }
 
-void Taskbar::draw(sf::RenderWindow& window)
-{
-	for (DropdownBox& drop : Taskbar::dropdownBoxes) drop.draw(window);
+void Taskbar::draw(sf::RenderWindow& window) {
+	for (Button butt : buttons) if (!butt.isPressed()) butt.draw(window);
+	for (Button butt : buttons) if (butt.isPressed()) butt.draw(window);
 }

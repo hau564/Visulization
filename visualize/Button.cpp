@@ -19,43 +19,64 @@ sf::RectangleShape ButtonFace::create(sf::Vector2f pos, sf::Vector2f size) {
 
 
 
-void Button::create(sf::Vector2f pos, sf::Vector2f size, Button4Faces state, const std::string label, int textSize) {
+void Button::create(sf::Vector2f pos, sf::Vector2f size, Button4Faces state, const std::string label, int _mode, int charSize) {
 	Button::faces[0] = state.normal.create(pos, size);
 	Button::faces[1] = state.focused.create(pos, size);
 	Button::faces[2] = state.pressed.create(pos, size);
 	Button::faces[3] = state.disabled.create(pos, size);
 
-	Button::font.loadFromFile("font/arial.ttf");
 
+	mode = _mode;
+
+
+	Button::font.loadFromFile("font/arial.ttf");
 	Button::text.setFont(font);
 	Button::text.setString(label);
-	Button::text.setCharacterSize(textSize ? textSize : (int)size.y / 2);
+	Button::text.setCharacterSize(charSize ? charSize : (int)size.y / 2);
 
 	sf::FloatRect textRect = text.getLocalBounds();
 	Button::text.setOrigin(textRect.left + textRect.width / 2.0f,
 		textRect.top + textRect.height / 2.0f);
 	Button::text.setPosition(sf::Vector2f(pos.x + size.x / 2.0f, pos.y + size.y / 2.0f));
-
 	Button::text.setFillColor(sf::Color::Black);
 
-	//std::cout << "Button created successfull: " << label << std::endl;
+
+	//std::cout << "Button created successfull at " << pos.x << " " << pos.y << ": " << label << std::endl;
 }
 
-int Button::run(sf::RenderWindow &window, sf::Event event) {
+int Button::run(sf::RenderWindow& window, sf::Event event) {
 	sf::FloatRect buttonBounds(faces[0].getPosition(), faces[0].getSize());
-	if (buttonBounds.contains(getMousePos(window).x, getMousePos(window).y))
-	{
-		if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
+
+	if (mode == NormalMode) {
+		if (buttonBounds.contains(getMousePos(window).x, getMousePos(window).y))
 		{
-			state = pressed;
+			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
+			{
+				state = pressed;
+			}
+			else {
+				if (state != pressed || event.type == sf::Event::MouseButtonReleased) state = focused;
+			}
 		}
 		else {
-			if (state != pressed || event.type == sf::Event::MouseButtonReleased) state = focused;
+			state = normal;
 		}
 	}
-	else {
-		state = normal;
+
+	if (mode != NormalMode) {
+		if (buttonBounds.contains(getMousePos(window).x, getMousePos(window).y))
+		{
+			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
+			{
+				if (state != pressed) state = pressed;
+				else state = normal;
+			}
+		}
+		else
+			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
+				if (mode == AutoOff) state = normal;
 	}
+
 	return state;
 }
 

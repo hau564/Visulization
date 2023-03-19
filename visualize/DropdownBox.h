@@ -11,6 +11,9 @@ public:
 	void disDropped();
 	void onDropped();
 
+	//enum DirId { left = 0, up = 1, right = 2, down = 3 };
+	//int dir[5] = { -1, 0, 1, 0, -1 };
+
 	bool dropped = false;
 	std::vector<Button> droppedButtons;
 	Button labelButton;

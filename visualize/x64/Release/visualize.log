@@ -1,7 +1,12 @@
 ﻿  main.cpp
+C:\Users\MAC_LENOVO\source\repos\visualize\visualize\Layout.h(22,32): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
   Generating code
-  23 of 373 functions ( 6.2%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+  13 of 246 functions ( 5.3%) were compiled, the rest were copied from previous compilation.
+    4 functions were new in current compilation
+    2 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   visualize.vcxproj -> C:\Users\MAC_LENOVO\source\repos\visualize\x64\Release\visualize.exe

@@ -21,10 +21,13 @@
     <ClCompile Include="Button.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Taskbar.cpp">
+    <ClCompile Include="MenuBar.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="DropdownBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Taskbar.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -44,13 +47,16 @@
     <ClInclude Include="MousPos.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Taskbar.h">
+    <ClInclude Include="MenuBar.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Layout.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DropdownBox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Taskbar.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

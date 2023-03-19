@@ -25,8 +25,9 @@ public:
 class Button {
 public:
 	Button() {};
-	void create(const sf::Vector2f pos, sf::Vector2f size, Button4Faces states, const std::string strText, int textSize = 0);
+	void create(const sf::Vector2f pos, sf::Vector2f size, Button4Faces states, const std::string strText, int _mode = 0, int charSize = 0);
 	int run(sf::RenderWindow &window, sf::Event event);
+	const void draw(sf::RenderWindow& window) const;
 
 	bool isPressed();
 	bool isFocused();
@@ -34,10 +35,9 @@ public:
 	std::string getLabel();
 	
 	enum StateId {normal = 0, focused = 1, pressed = 2, disabled = 3};
+	enum Mode {NormalMode = 0, OnOffMode = 1, AutoOff = 2};
 
-	const void draw(sf::RenderWindow& window) const;
-
-	int state = normal; // 0 1 2 3 : normal focused pressed disabled
+	int state = normal, mode = NormalMode; 
 	sf::RectangleShape faces[4];
 	sf::Text text;
 

@@ -5,7 +5,7 @@
 
 namespace style {
 	int Width = 1920;
-	int Height = 1200;
+	int Height = 1080;
 
 	sf::Color backgroundColor = sf::Color::White;
 
@@ -36,7 +36,7 @@ namespace style {
 	}
 
 
-	namespace taskbar {
+	namespace menuBar {
 		namespace blockStyle {
 			ButtonFace normal{
 				1,

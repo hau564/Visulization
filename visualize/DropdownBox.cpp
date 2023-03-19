@@ -11,7 +11,7 @@ void DropdownBox::create(sf::Vector2f pos, sf::Vector2f labelButtonSize, sf::Vec
 }
 
 std::string DropdownBox::run(sf::RenderWindow &window, sf::Event event) {
-	std::string stringPressed = labelButton.getLabel();
+	std::string stringPressed = "none";
 	if (!dropped) {
 		DropdownBox::dropped = (!DropdownBox::labelButton.isPressed() 
 							  && DropdownBox::labelButton.run(window, event) == 2);
@@ -30,11 +30,12 @@ std::string DropdownBox::run(sf::RenderWindow &window, sf::Event event) {
 		for (Button& btn : droppedButtons) {
 			int status = btn.run(window, event);
 			stillDropped |= status;
-			if ((status) == 2) stringPressed += ":" + btn.getLabel();
+			if ((status) == 2) stringPressed = labelButton.getLabel() + ":" + btn.getLabel();
 		}
 		if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
 			dropped = stillDropped;
 	}
+	if (labelButton.isPressed() && dropped) stringPressed = labelButton.getLabel();
 	return stringPressed;
 }
 
@@ -46,11 +47,9 @@ void DropdownBox::draw(sf::RenderWindow& window) {
 	}
 }
 
-void DropdownBox::disDropped()
-{
+void DropdownBox::disDropped() {
 	DropdownBox::dropped = false;
 }
-void DropdownBox::onDropped()
-{
+void DropdownBox::onDropped() {
 	DropdownBox::dropped = true;
 }

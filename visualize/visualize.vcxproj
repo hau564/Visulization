@@ -142,6 +142,7 @@
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="DropdownBox.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MenuBar.cpp" />
     <ClCompile Include="Taskbar.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -151,6 +152,7 @@
     <ClInclude Include="Layout.h" />
     <ClInclude Include="MousPos.h" />
     <ClInclude Include="Style.h" />
+    <ClInclude Include="MenuBar.h" />
     <ClInclude Include="Taskbar.h" />
     <ClInclude Include="Visualize.h" />
   </ItemGroup>
