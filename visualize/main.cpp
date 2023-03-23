@@ -1,16 +1,35 @@
 #include "Visualize.h"
 
-sf::RectangleShape functionWindow;
 Taskbar structures;
+std::map<std::string, int> structId;
 
 void initVariables() {
-    functionWindow.setPosition(layout::functionWindow::pos);
-    functionWindow.setSize(layout::functionWindow::size);
-    functionWindow.setFillColor(sf::Color::White);
-    functionWindow.setOutlineThickness(1);
-    functionWindow.setOutlineColor(sf::Color::Black);
+    layout::init();
+    staticArray::init();
 
-    structures.create(layout::structuresBar::pos, layout::structuresBar::blockSize, style::button::faces, layout::structuresBar::labels, layout::structuresBar::direction, layout::structuresBar::charSize);
+    for (int i = 0; i < layout::structuresBar::labels.size(); ++i)
+        structId[layout::structuresBar::labels[i]] = i + 1;
+}
+
+void run(sf::RenderWindow& window, sf::Event event, std::string s) {
+    switch (structId[s]) {
+    case 1:
+        staticArray::run(window, event);
+        break;
+    default:
+        break;
+    }
+}
+
+void draw(sf::RenderWindow& window, std::string s) {
+    switch (structId[s])
+    {
+    case 1:
+        staticArray::draw(window);
+        break;
+    default:
+        break;
+    }
 }
     
 int main()
@@ -19,25 +38,27 @@ int main()
 
     initVariables();
 
-    while (window.isOpen())
-    {
+    std::string cStruct = "";
+    while (window.isOpen()) {
         sf::Event event;
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-            {
+        while (window.pollEvent(event)) {
+            if (event.type == sf::Event::Closed) {
                 window.close();
             }
 
-            std::cout << structures.run(window, event) << std::endl;
+            cStruct = layout::structuresBar::bar.run(window, event);
+            //std::cout << cStruct << std::endl;
+
+            run(window, event, cStruct);
         }
 
         window.clear(style::backgroundColor);
-
-        window.draw(functionWindow);
         
-        structures.draw(window);
+        
+        layout::structuresBar::bar.draw(window);
+        draw(window, cStruct);
 
+        
         window.display();
     }
 

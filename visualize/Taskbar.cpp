@@ -4,7 +4,6 @@ void Taskbar::create(sf::Vector2f pos, sf::Vector2f size, Button4Faces style, st
 	int labelCount = labels.size();
 
 	w = _w;
-	std::cout << dir[w] << " " << dir[w + 1] << std::endl;
 	
 	buttons.assign(labelCount, Button());
 	for (int i = 0; i < labelCount; ++i) {
@@ -29,6 +28,6 @@ std::string Taskbar::run(sf::RenderWindow& window, sf::Event event)
 }
 
 void Taskbar::draw(sf::RenderWindow& window) {
-	for (Button butt : buttons) if (!butt.isPressed()) butt.draw(window);
-	for (Button butt : buttons) if (butt.isPressed()) butt.draw(window);
+	for (Button butt : buttons) if (!butt.isPressed() && !butt.isFocused()) butt.draw(window);
+	for (Button butt : buttons) if (butt.isPressed() || butt.isFocused()) butt.draw(window);
 }

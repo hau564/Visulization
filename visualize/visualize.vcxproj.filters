@@ -13,51 +13,90 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Tools">
+      <UniqueIdentifier>{049d5525-8a25-4486-9163-130d50e227b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Design">
+      <UniqueIdentifier>{2dd98b6a-2c7b-47f9-94e4-ae3b1f03e2f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ToolsFunction">
+      <UniqueIdentifier>{af39b1fa-93b5-4625-9c83-383f5e679441}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Design">
+      <UniqueIdentifier>{60e26424-1bdf-41b0-a386-cb735353e158}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Structs">
+      <UniqueIdentifier>{2a759017-6aef-43ab-9073-d7f2579e1c0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\StructsFunction">
+      <UniqueIdentifier>{3f904baf-fb98-4e22-be85-a2f82efb5fc9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Button.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MenuBar.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\ToolsFunction</Filter>
     </ClCompile>
     <ClCompile Include="DropdownBox.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\ToolsFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuBar.cpp">
+      <Filter>Source Files\ToolsFunction</Filter>
     </ClCompile>
     <ClCompile Include="Taskbar.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\ToolsFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="Layout.cpp">
+      <Filter>Source Files\Design</Filter>
+    </ClCompile>
+    <ClCompile Include="Style.cpp">
+      <Filter>Source Files\Design</Filter>
+    </ClCompile>
+    <ClCompile Include="StaticArray.cpp">
+      <Filter>Source Files\StructsFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="Textbox.cpp">
+      <Filter>Source Files\ToolsFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="MousePos.cpp">
+      <Filter>Source Files\ToolsFunction</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Visualize.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Style.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Button.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Tools</Filter>
     </ClInclude>
     <ClInclude Include="Color.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MousPos.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MenuBar.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Layout.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Tools</Filter>
     </ClInclude>
     <ClInclude Include="DropdownBox.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Tools</Filter>
     </ClInclude>
     <ClInclude Include="Taskbar.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuBar.h">
+      <Filter>Header Files\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="MousePos.h">
+      <Filter>Header Files\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Layout.h">
+      <Filter>Header Files\Design</Filter>
+    </ClInclude>
+    <ClInclude Include="Style.h">
+      <Filter>Header Files\Design</Filter>
+    </ClInclude>
+    <ClInclude Include="Visualize.h">
+      <Filter>Header Files\Design</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticArray.h">
+      <Filter>Header Files\Structs</Filter>
+    </ClInclude>
+    <ClInclude Include="Textbox.h">
+      <Filter>Header Files\Tools</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

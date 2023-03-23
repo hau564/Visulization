@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Button.h"
-#include "MousPos.h"
+#include "MousePos.h"
 
 
 sf::RectangleShape ButtonFace::create(sf::Vector2f pos, sf::Vector2f size) {
@@ -19,7 +19,8 @@ sf::RectangleShape ButtonFace::create(sf::Vector2f pos, sf::Vector2f size) {
 
 
 
-void Button::create(sf::Vector2f pos, sf::Vector2f size, Button4Faces state, const std::string label, int _mode, int charSize) {
+void Button::create(sf::Vector2f _pos, sf::Vector2f _size, Button4Faces state, const std::string label, int _mode, int charSize) {
+	pos = _pos, size = _size;
 	Button::faces[0] = state.normal.create(pos, size);
 	Button::faces[1] = state.focused.create(pos, size);
 	Button::faces[2] = state.pressed.create(pos, size);
@@ -46,9 +47,9 @@ void Button::create(sf::Vector2f pos, sf::Vector2f size, Button4Faces state, con
 
 int Button::run(sf::RenderWindow& window, sf::Event event) {
 	sf::FloatRect buttonBounds(faces[0].getPosition(), faces[0].getSize());
-
+	sf::Vector2f mousePos = (sf::Vector2f)getMousePos(window);
 	if (mode == NormalMode) {
-		if (buttonBounds.contains(getMousePos(window).x, getMousePos(window).y))
+		if (buttonBounds.contains(mousePos.x, mousePos.y))
 		{
 			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
 			{
@@ -64,17 +65,20 @@ int Button::run(sf::RenderWindow& window, sf::Event event) {
 	}
 
 	if (mode != NormalMode) {
-		if (buttonBounds.contains(getMousePos(window).x, getMousePos(window).y))
+		if (buttonBounds.contains(mousePos.x, mousePos.y))
 		{
 			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
 			{
 				if (state != pressed) state = pressed;
-				else state = normal;
+				else state = focused;
 			}
+			else if (state != pressed) state = focused;
 		}
-		else
+		else {
 			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
 				if (mode == AutoOff) state = normal;
+			if (state == focused) state = normal;
+		}
 	}
 
 	return state;

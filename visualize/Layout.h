@@ -1,26 +1,38 @@
 #pragma once
 
-#include "Button.h"
 #include "Style.h"
 #include "Taskbar.h"
 #include<SFML/Graphics.hpp>
 
 namespace layout {
-	int Width = 1920, Height = 1080;
+	extern int Width, Height;
 
 	namespace functionWindow {
-		sf::Vector2f size(300, 800);
-		sf::Vector2f pos(Width - size.x, Height - size.y);
+		extern sf::Vector2f size;
+		extern sf::Vector2f pos;
+		extern sf::Vector2f blockSize;
 
-		sf::Vector2f blockSize(300, 100);
+		extern sf::RectangleShape shape;
+	}
+
+	namespace sourceWindow {
+		extern sf::Vector2f size;
+		extern sf::Vector2f pos;
+		extern sf::Vector2f blockSize;
+
+		extern sf::RectangleShape shape;
 	}
 
 	namespace structuresBar {
-		std::vector<std::string> labels = { "Static Array", "Dyamic Array", "Linked List (LL)", "Doubly LL" , "Circular LL", "Queue", "Stack"};
+		extern std::vector<std::string> labels;
 	
-		sf::Vector2f pos(0, 0);
-		sf::Vector2f blockSize(Width / 7, 70);
-		int direction = Taskbar::right;
-		int charSize = 30;
+		extern sf::Vector2f pos;
+		extern sf::Vector2f blockSize;
+		extern int direction;
+		extern int charSize;
+
+		extern Taskbar bar;
 	}
+
+	extern void init();
 }

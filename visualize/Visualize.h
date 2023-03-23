@@ -10,3 +10,6 @@
 #include "DropdownBox.h"
 #include "MenuBar.h"
 #include "Taskbar.h"
+#include "Textbox.h"
+
+#include "StaticArray.h"
