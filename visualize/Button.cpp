@@ -70,13 +70,13 @@ int Button::run(sf::RenderWindow& window, sf::Event event) {
 			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
 			{
 				if (state != pressed) state = pressed;
-				else state = focused;
+				else if (mode != StayClick) state = focused;
 			}
 			else if (state != pressed) state = focused;
 		}
 		else {
 			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
-				if (mode == AutoOff) state = normal;
+				if (mode == AutoOff || mode == StayClick) state = normal;
 			if (state == focused) state = normal;
 		}
 	}

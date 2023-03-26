@@ -35,7 +35,7 @@ public:
 	std::string getLabel();
 	
 	enum StateId {normal = 0, focused = 1, pressed = 2, disabled = 3};
-	enum Mode {NormalMode = 0, OnOffMode = 1, AutoOff = 2};
+	enum Mode {NormalMode = 0, OnOffMode = 1, AutoOff = 2, StayClick = 3};
 
 	int state = normal, mode = NormalMode; 
 	sf::RectangleShape faces[4];

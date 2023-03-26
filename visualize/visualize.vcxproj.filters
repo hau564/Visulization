@@ -31,6 +31,12 @@
     <Filter Include="Source Files\StructsFunction">
       <UniqueIdentifier>{3f904baf-fb98-4e22-be85-a2f82efb5fc9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\InternalTools">
+      <UniqueIdentifier>{3b053d35-4ba8-4f6e-95b4-f3d64f07ac47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\InternalToolsFunction">
+      <UniqueIdentifier>{02d27828-10c4-4dde-b626-835d44e74940}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -62,6 +68,12 @@
     </ClCompile>
     <ClCompile Include="MousePos.cpp">
       <Filter>Source Files\ToolsFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="Function.cpp">
+      <Filter>Source Files\InternalToolsFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="Format.cpp">
+      <Filter>Source Files\InternalToolsFunction</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -97,6 +109,15 @@
     </ClInclude>
     <ClInclude Include="Textbox.h">
       <Filter>Header Files\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Function.h">
+      <Filter>Header Files\InternalTools</Filter>
+    </ClInclude>
+    <ClInclude Include="Format.h">
+      <Filter>Header Files\InternalTools</Filter>
+    </ClInclude>
+    <ClInclude Include="Display.h">
+      <Filter>Header Files\InternalTools</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

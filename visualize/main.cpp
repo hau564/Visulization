@@ -35,7 +35,7 @@ void draw(sf::RenderWindow& window, std::string s) {
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(style::Width, style::Height), "Visualize");
-
+    window.setFramerateLimit(30);
     initVariables();
 
     std::string cStruct = "";

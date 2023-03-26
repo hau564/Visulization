@@ -30,12 +30,28 @@ void Textbox::create(sf::Vector2f pos, sf::Vector2f size, std::string textStr, i
 
     sf::FloatRect nRect = text.getGlobalBounds();
     sf::Vector2f buttonPos = sf::Vector2f(nRect.left - 1, pos.y + size.y / 2 - iTextRect.height / 2 + 1);
-    buttonText.create(buttonPos, sf::Vector2f(pos.x + size.x - buttonPos.x, iTextRect.height + 1), style::button::textButton::faces, "", Button::AutoOff);
+    buttonText.create(buttonPos, sf::Vector2f(pos.x + size.x - buttonPos.x, iTextRect.height + 1), style::button::textButton::faces, "", Button::StayClick);
+    
+    textLengthLimit = pos.x + size.x - buttonPos.x;
+}
+
+void Textbox::applyText() {
+    text.setString(inputString);
+
+    std::string replaceString = inputString;
+    std::reverse(replaceString.begin(), replaceString.end());
+    while (text.getLocalBounds().width > textLengthLimit) {
+        while (replaceString.back() == '.') replaceString.pop_back();
+        replaceString.pop_back();
+        replaceString += "...";
+        text.setString(replaceString);
+    }
+    std::reverse(replaceString.begin(), replaceString.end());
+    text.setString(replaceString);
 }
 
 void Textbox::run(sf::RenderWindow& window, sf::Event event) {
-    buttonText.run(window, event);
-	if (buttonText.isPressed()) {
+    if (buttonText.run(window, event) == Button::pressed) {
         if (event.type == sf::Event::TextEntered)
         {
             if (event.text.unicode < 128)
@@ -45,7 +61,7 @@ void Textbox::run(sf::RenderWindow& window, sf::Event event) {
                     if (!inputString.empty())
                     {
                         inputString.pop_back();
-                        text.setString(inputString);
+                        applyText();
                     }
                 }
                 else if (event.text.unicode == '\r') 
@@ -55,7 +71,7 @@ void Textbox::run(sf::RenderWindow& window, sf::Event event) {
                 else if (inputString.size() < lengthLimit)
                 {
                     inputString += static_cast<char>(event.text.unicode);
-                    text.setString(inputString);
+                    applyText();
                 }
             }
         }
@@ -66,4 +82,9 @@ void Textbox::draw(sf::RenderWindow& window) {
 	window.draw(guideText);
     buttonText.draw(window);
     window.draw(text);
+}
+
+void Textbox::clear() {
+    inputString = "";
+    text.setString(inputString);
 }

@@ -141,6 +141,8 @@
   <ItemGroup>
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="DropdownBox.cpp" />
+    <ClCompile Include="Format.cpp" />
+    <ClCompile Include="Function.cpp" />
     <ClCompile Include="Layout.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MenuBar.cpp" />
@@ -154,6 +156,9 @@
     <ClInclude Include="Button.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="DropdownBox.h" />
+    <ClInclude Include="Format.h" />
+    <ClInclude Include="Function.h" />
+    <ClInclude Include="Display.h" />
     <ClInclude Include="Layout.h" />
     <ClInclude Include="MousePos.h" />
     <ClInclude Include="StaticArray.h" />
