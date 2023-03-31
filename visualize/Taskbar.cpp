@@ -15,8 +15,10 @@ std::string Taskbar::run(sf::RenderWindow& window, sf::Event event)
 {
 	std::string ans = "none";
 	for (int i = 0; i < (int)buttons.size(); ++i) {
+		int prevState = buttons[i].state;
 		if (buttons[i].run(window, event) == Button::pressed) {
 			ans = buttons[i].getLabel();
+			if (prevState != Button::pressed)
 			for (int j = 0; j < (int)buttons.size(); ++j) {
 				if (i != j) {
 					buttons[j].resetState();

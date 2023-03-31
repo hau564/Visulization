@@ -75,6 +75,18 @@
     <ClCompile Include="Format.cpp">
       <Filter>Source Files\InternalToolsFunction</Filter>
     </ClCompile>
+    <ClCompile Include="Display.cpp">
+      <Filter>Source Files\InternalToolsFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="ButtonImage.cpp">
+      <Filter>Source Files\ToolsFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="Slider.cpp">
+      <Filter>Source Files\ToolsFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="Control.cpp">
+      <Filter>Source Files\InternalToolsFunction</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Button.h">
@@ -117,6 +129,15 @@
       <Filter>Header Files\InternalTools</Filter>
     </ClInclude>
     <ClInclude Include="Display.h">
+      <Filter>Header Files\InternalTools</Filter>
+    </ClInclude>
+    <ClInclude Include="ButtonImage.h">
+      <Filter>Header Files\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Slider.h">
+      <Filter>Header Files\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Control.h">
       <Filter>Header Files\InternalTools</Filter>
     </ClInclude>
   </ItemGroup>

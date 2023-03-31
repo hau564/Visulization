@@ -1,1 +1,28 @@
-﻿  visualize.vcxproj -> C:\Users\MAC_LENOVO\source\repos\visualize\x64\Release\visualize.exe
+﻿  Layout.cpp
+C:\Users\MAC_LENOVO\source\repos\visualize\visualize\Layout.cpp(9,21): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\MAC_LENOVO\source\repos\visualize\visualize\Layout.cpp(23,39): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\MAC_LENOVO\source\repos\visualize\visualize\Layout.cpp(32,43): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\MAC_LENOVO\source\repos\visualize\visualize\Layout.cpp(53,32): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\MAC_LENOVO\source\repos\visualize\visualize\Layout.cpp(74,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Generating code
+  88 of 1026 functions ( 8.6%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  visualize.vcxproj -> C:\Users\MAC_LENOVO\source\repos\visualize\x64\Release\visualize.exe

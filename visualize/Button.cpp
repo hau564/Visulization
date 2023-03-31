@@ -46,7 +46,7 @@ void Button::create(sf::Vector2f _pos, sf::Vector2f _size, Button4Faces state, c
 }
 
 int Button::run(sf::RenderWindow& window, sf::Event event) {
-	sf::FloatRect buttonBounds(faces[0].getPosition(), faces[0].getSize());
+	sf::FloatRect buttonBounds(pos, size);
 	sf::Vector2f mousePos = (sf::Vector2f)getMousePos(window);
 	if (mode == NormalMode) {
 		if (buttonBounds.contains(mousePos.x, mousePos.y))

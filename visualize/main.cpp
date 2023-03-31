@@ -5,6 +5,8 @@ std::map<std::string, int> structId;
 
 void initVariables() {
     layout::init();
+    control::init();
+
     staticArray::init();
 
     for (int i = 0; i < layout::structuresBar::labels.size(); ++i)
@@ -38,6 +40,9 @@ int main()
     window.setFramerateLimit(30);
     initVariables();
 
+    Slider slider;
+    slider.create(sf::Vector2f(200, 300), sf::Vector2f(200, 10), sf::Color::Green, sf::Color::Red, 100);
+
     std::string cStruct = "";
     while (window.isOpen()) {
         sf::Event event;
@@ -50,6 +55,10 @@ int main()
             //std::cout << cStruct << std::endl;
 
             run(window, event, cStruct);
+
+            slider.run(window, event);
+
+            control::run(window, event);
         }
 
         window.clear(style::backgroundColor);
@@ -57,7 +66,10 @@ int main()
         
         layout::structuresBar::bar.draw(window);
         draw(window, cStruct);
+        display::displayAll(window);
 
+        slider.draw(window);
+        control::draw(window);
         
         window.display();
     }

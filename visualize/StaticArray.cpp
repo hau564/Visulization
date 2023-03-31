@@ -2,6 +2,7 @@
 #include "Style.h"
 #include "Layout.h"
 #include "MousePos.h"
+#include "Display.h"
 
 namespace staticArray {
 	std::vector<Function> functions;
@@ -15,17 +16,15 @@ namespace staticArray {
 
 	void run(sf::RenderWindow& window, sf::Event event) {
 		std::vector<std::string> get(0);
-		if (functions[0].run(window, event, get));
-		if (functions[1].run(window, event, get));
+		if (functions[0].run(window, event, get)) display::array::create(get);
+		if (functions[1].run(window, event, get)) display::array::update(get);
 
-		if (get.size()) {
-			for (std::string s : get) 
-				std::cout << s << "\n";
-		}
 	}
 
 	void draw(sf::RenderWindow& window) {
 		window.draw(layout::functionWindow::shape);
+		window.draw(layout::displayWindow::shape);
+		window.draw(layout::sourceWindow::shape);
 
 		for (Function& func : functions)
 			if (!func.functionButton.isPressed() && !func.functionButton.isFocused())

@@ -51,3 +51,10 @@ void Function::draw(sf::RenderWindow& window)
 		go.draw(window);
 	}
 }
+
+std::vector<std::string> Function::getInputVector() {
+	std::vector<std::string> strs;
+	for (Textbox& tbox : textboxes)
+		strs.push_back(tbox.inputString);
+	return strs;
+}
