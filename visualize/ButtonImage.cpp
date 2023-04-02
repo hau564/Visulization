@@ -20,6 +20,7 @@ void ButtonImage::create(sf::Vector2f _pos, sf::Vector2f _size, const std::vecto
 }
 
 int ButtonImage::run(sf::RenderWindow& window, sf::Event event) {
+	prevState = state;
 	sf::FloatRect buttonBounds(pos, size);
 	sf::Vector2f mousePos = (sf::Vector2f)getMousePos(window);
 	if (mode == NormalMode) {
@@ -67,8 +68,11 @@ void ButtonImage::resetState() {
 }
 
 bool ButtonImage::isPressed() {
-	return state == ButtonImage::pressed;
+	return state == pressed;
+}
+bool ButtonImage::justPressed() {
+	return prevState != pressed && state == pressed;
 }
 bool ButtonImage::isFocused() {
-	return state == ButtonImage::focused;
+	return state == focused;
 }

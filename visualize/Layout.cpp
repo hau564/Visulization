@@ -1,5 +1,6 @@
 #include "Layout.h"
 #include "Style.h"
+#include "Color.h"
 namespace layout {
 	int Width = style::Width, Height = style::Height;
 	sf::Font font; 
@@ -25,6 +26,11 @@ namespace layout {
 
 		sf::Vector2f toEndSize = toStartSize;
 		sf::Vector2f toEndPos(nextPos.x + nextSize.x + dis, playPos.y);
+
+		sf::Vector2f speedSize(200, 10);
+		sf::Vector2f speedPos(100, pos.y + (size.y - speedSize.y) / 2);
+		sf::Color speedBack = color::whiteGray;
+		sf::Color speedSele = sf::Color::Black;
 	}
 
 	namespace functionWindow {
@@ -37,7 +43,10 @@ namespace layout {
 	namespace sourceWindow {
 		sf::Vector2f size(400, functionWindow::size.y);
 		sf::Vector2f pos(0, functionWindow::pos.y);
+		sf::Vector2f blockSize(size.x, 50);
 		sf::RectangleShape shape;
+
+		int fontSize = 30;
 	}
 
 	namespace displayWindow {

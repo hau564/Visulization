@@ -11,6 +11,7 @@ namespace format {
 	bool toInt(std::string s, int& x) {
 		x = 0;
 		format(s);
+		if (s == "") return true;
 		
 		for (char c : s) 
 			if (c < '0' || c > '9') return false;
@@ -22,6 +23,7 @@ namespace format {
 	bool toVectorInt(std::string s, std::vector<int>& arr) {
 		arr.clear();
 		format(s);
+		if (s == "") return true;
 
 		for (char c : s)
 			if (c < '0' && c > '9' && c != ',')

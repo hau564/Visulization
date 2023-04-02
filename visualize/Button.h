@@ -30,6 +30,7 @@ public:
 	const void draw(sf::RenderWindow& window) const;
 
 	bool isPressed();
+	bool justPressed();
 	bool isFocused();
 	void resetState();
 	std::string getLabel();
@@ -37,7 +38,7 @@ public:
 	enum StateId {normal = 0, focused = 1, pressed = 2, disabled = 3};
 	enum Mode {NormalMode = 0, OnOffMode = 1, AutoOff = 2, StayClick = 3};
 
-	int state = normal, mode = NormalMode; 
+	int state = normal, prevState, mode = NormalMode; 
 	sf::RectangleShape faces[4];
 	sf::Text text;
 	sf::Vector2f pos, size;

@@ -87,12 +87,15 @@
     <ClCompile Include="Control.cpp">
       <Filter>Source Files\InternalToolsFunction</Filter>
     </ClCompile>
+    <ClCompile Include="Color.cpp">
+      <Filter>Source Files\Design</Filter>
+    </ClCompile>
+    <ClCompile Include="Source.cpp">
+      <Filter>Source Files\InternalToolsFunction</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Button.h">
-      <Filter>Header Files\Tools</Filter>
-    </ClInclude>
-    <ClInclude Include="Color.h">
       <Filter>Header Files\Tools</Filter>
     </ClInclude>
     <ClInclude Include="DropdownBox.h">
@@ -138,6 +141,12 @@
       <Filter>Header Files\Tools</Filter>
     </ClInclude>
     <ClInclude Include="Control.h">
+      <Filter>Header Files\InternalTools</Filter>
+    </ClInclude>
+    <ClInclude Include="Color.h">
+      <Filter>Header Files\Design</Filter>
+    </ClInclude>
+    <ClInclude Include="Source.h">
       <Filter>Header Files\InternalTools</Filter>
     </ClInclude>
   </ItemGroup>

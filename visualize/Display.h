@@ -24,5 +24,6 @@ namespace display {
 		extern void update(std::vector<std::string> inputStrs);
 	}
 
+	extern void run(sf::RenderWindow& window, sf::Event event);
 	extern void displayAll(sf::RenderWindow& window);
 }

@@ -1,7 +1,7 @@
 #include "Slider.h"
 #include "MousePos.h"
 
-void Slider::create(sf::Vector2f _pos, sf::Vector2f _size, sf::Color backColor, sf::Color seleColor, int initialLength, int _cntDiv) {
+void Slider::create(sf::Vector2f _pos, sf::Vector2f _size, sf::Color backColor, sf::Color seleColor, float initialRate, int _cntDiv) {
 	pos = _pos, size = _size;
 	
 	background.setPosition(pos);
@@ -10,7 +10,7 @@ void Slider::create(sf::Vector2f _pos, sf::Vector2f _size, sf::Color backColor, 
 	background.setOutlineThickness(1);
 	background.setOutlineColor(backColor);
 
-	selectedLength = initialLength;
+	selectedLength = initialRate * size.x;
 	selected.setPosition(pos);
 	selected.setSize(sf::Vector2f(selectedLength, size.y));
 	selected.setFillColor(seleColor);
@@ -55,4 +55,9 @@ void Slider::draw(sf::RenderWindow& window) {
 
 float Slider::get() {
 	return 1.0 * selectedLength / size.x;
+}
+
+void Slider::round(float x) {
+	int y = ((1.0 * selectedLength / size.x + 0.0000001) / x + 0.99999);
+	setSelected(x * y);
 }

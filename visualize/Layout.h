@@ -20,6 +20,9 @@ namespace layout {
 
 		extern sf::Vector2f toStartPos, toStartSize;
 		extern sf::Vector2f toEndPos, toEndSize;
+
+		extern sf::Vector2f speedPos, speedSize;
+		extern sf::Color speedBack, speedSele;
 	}
 
 	namespace functionWindow {
@@ -42,6 +45,8 @@ namespace layout {
 		extern sf::Vector2f blockSize;
 
 		extern sf::RectangleShape shape;
+		
+		extern int fontSize;
 	}
 
 	namespace structuresBar {

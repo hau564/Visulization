@@ -46,6 +46,8 @@ void Button::create(sf::Vector2f _pos, sf::Vector2f _size, Button4Faces state, c
 }
 
 int Button::run(sf::RenderWindow& window, sf::Event event) {
+	prevState = state;
+
 	sf::FloatRect buttonBounds(pos, size);
 	sf::Vector2f mousePos = (sf::Vector2f)getMousePos(window);
 	if (mode == NormalMode) {
@@ -90,16 +92,19 @@ const void Button::draw(sf::RenderWindow& window) const {
 }
 
 void Button::resetState() {
-	Button::state = normal;
+	state = normal;
 }
 
 bool Button::isPressed() {
-	return state == Button::pressed;
+	return state == pressed;
+}
+bool Button::justPressed() {
+	return prevState != pressed && state == pressed;
 }
 bool Button::isFocused() {
-	return state == Button::focused;
+	return state == focused;
 }
 
 std::string Button::getLabel() {
-	return Button::text.getString().toAnsiString();
+	return text.getString().toAnsiString();
 }
