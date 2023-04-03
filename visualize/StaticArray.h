@@ -5,7 +5,7 @@
 #include "Control.h"
 
 namespace staticArray {
-	extern std::vector<Function> functions;
+	extern Function create, update;
 	extern std::vector<int> arr;
 	extern void init();
 	extern void run(sf::RenderWindow& window, sf::Event event);

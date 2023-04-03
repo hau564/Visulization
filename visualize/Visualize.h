@@ -19,4 +19,11 @@
 #include "Control.h"
 #include "Source.h"
 
+#include "ArrayNode.h"
+#include "LinkedListNode.h"
+#include "Arrow.h"
+#include "Layer.h"
+
 #include "StaticArray.h"
+#include "DynamicArray.h"
+#include "LinkedList.h"

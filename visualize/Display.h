@@ -2,28 +2,19 @@
 
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include "Layer.h"
 
 namespace display {
-	extern std::vector<std::vector<sf::Text>> texts;
-	extern std::vector<std::vector<sf::CircleShape>> circles;
-	extern std::vector<std::vector<sf::RectangleShape>> rectangles;
+	extern std::vector<Layer> layers;
+	
+	extern void deleteDisplay();
+	extern void start();
+	extern void addLayer(Layer layer, float weight = 1.0, int checkPoint = 1);
+	extern void addSource(std::vector<std::string> code);
 
-	extern std::vector<int> arr;
-	extern std::vector<int> ll;
-
-	extern void clear();
-	extern bool resetDisplay();
-
-	extern void setTextRectangle(sf::Text& text, sf::RectangleShape& rect, std::string s);
-
-	namespace array {
-		extern void create(std::string _n, std::string _values);
-		extern void create(std::vector<std::string> inputStrs);
-		
-		extern void update(std::string _pos, std::string _val);
-		extern void update(std::vector<std::string> inputStrs);
-	}
+	extern std::vector<int> sourceOrder;
+	extern void addSourceOrder(std::vector<int> ord);
 
 	extern void run(sf::RenderWindow& window, sf::Event event);
-	extern void displayAll(sf::RenderWindow& window);
+	extern void draw(sf::RenderWindow& window);
 }

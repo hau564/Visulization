@@ -60,12 +60,18 @@ namespace layout {
 		extern Taskbar bar;
 	}
 
+	namespace arrow {
+		extern std::string txt[3];
+		extern sf::Texture t[3];
+	}
+
 	namespace display {
 		extern sf::Color normalColor, visitedColor, considerColor, targetColor;
 
 		extern sf::Vector2f arrayBlockSize;
 		extern sf::RectangleShape arrayBlock;
-		extern sf::Text arrayText;
+		
+		extern sf::CircleShape linkedListBlock;
 	}
 
 	extern void init();

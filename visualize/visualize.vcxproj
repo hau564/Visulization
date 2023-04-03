@@ -139,15 +139,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ArrayNode.cpp" />
+    <ClCompile Include="Arrow.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="ButtonImage.cpp" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="Control.cpp" />
     <ClCompile Include="Display.cpp" />
     <ClCompile Include="DropdownBox.cpp" />
+    <ClCompile Include="DynamicArray.cpp" />
     <ClCompile Include="Format.cpp" />
     <ClCompile Include="Function.cpp" />
+    <ClCompile Include="Layer.cpp" />
     <ClCompile Include="Layout.cpp" />
+    <ClCompile Include="LinkedList.cpp" />
+    <ClCompile Include="LinkedListNode.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MenuBar.cpp" />
     <ClCompile Include="MousePos.cpp" />
@@ -159,14 +165,20 @@
     <ClCompile Include="Textbox.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Arrow.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="ButtonImage.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="Control.h" />
     <ClInclude Include="DropdownBox.h" />
+    <ClInclude Include="DynamicArray.h" />
     <ClInclude Include="Format.h" />
     <ClInclude Include="Function.h" />
     <ClInclude Include="Display.h" />
+    <ClInclude Include="ArrayNode.h" />
+    <ClInclude Include="Layer.h" />
+    <ClInclude Include="LinkedList.h" />
+    <ClInclude Include="LinkedListNode.h" />
     <ClInclude Include="Source.h" />
     <ClInclude Include="Layout.h" />
     <ClInclude Include="MousePos.h" />

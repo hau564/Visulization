@@ -8,101 +8,81 @@
 #include "Source.h"
 
 namespace staticArray {
-	std::vector<Function> functions;
-	void init() {
-		functions.assign(2, Function());
-		sf::Vector2f pos = layout::functionWindow::pos;
-		sf::Vector2f blockSize = layout::functionWindow::blockSize;
-		functions[0].create(pos, blockSize, "Create", { "Size: ", "Values: " });
-		functions[1].create(pos + sf::Vector2f(0, 1 * blockSize.y), blockSize, "Update", { "Pos: ", "Value: " });
-	}
-
+	Function create, update;
 	std::vector<int> arr;
-	void createArray(std::vector<std::vector<sf::Text>>& texts, std::vector<std::vector<sf::RectangleShape>>& rectangles) {
-		int n = arr.size();
-		int length = n * layout::display::arrayBlockSize.x;
-		sf::Vector2f startPos(layout::displayWindow::pos.x + (layout::displayWindow::size.x - length) / 2,
-			layout::displayWindow::pos.y + (layout::displayWindow::size.y - layout::display::arrayBlockSize.y) / 2 - 50);
 
-		rectangles.push_back(std::vector<sf::RectangleShape>());
-		rectangles[0].assign(n, layout::display::arrayBlock);
-		texts.push_back(std::vector<sf::Text>());
-		texts[0].assign(n, sf::Text());
-
-		for (int i = 0; i < n; ++i) {
-			rectangles[0][i].setPosition(startPos + sf::Vector2f(i * layout::display::arrayBlockSize.x + i, 0));
-			display::setTextRectangle(texts[0][i], rectangles[0][i], format::toString(arr[i]));
-		}
+	void init() {
+		create.create(layout::functionWindow::pos, layout::functionWindow::blockSize, "Create", { "Size: ", "Values: " });
+		update.create(layout::functionWindow::pos + sf::Vector2f(0, layout::functionWindow::blockSize.y), layout::functionWindow::blockSize, "Update", {"Pos: ", "Value: "});
 	}
-	void createSlides(std::string _n, std::string _values, std::vector<std::vector<sf::Text>>& texts, std::vector<std::vector<sf::RectangleShape>>& rectangles) {
+
+	void Create(std::string _n, std::string _values) {
 		int n;
 		if (!format::toInt(_n, n)) return;
 		if (!format::toVectorInt(_values, arr)) return;
 
-		if (!n) n = rand() % 15 + 1;
+		if (_n == "") n = rand() % 20 + 1;
 		if (arr.empty()) {
-			while (arr.size() < n) arr.push_back(rand() % 100);
+			for (int i = 0; i < n; ++i)
+				arr.push_back(rand() % 100);
 		}
 		else {
-			while (arr.size() < n) arr.push_back(0);
+			while (arr.size() < n)
+				arr.push_back(0);
 		}
 
-		texts.clear();
-		rectangles.clear();
-		control::clear();
-		control::start();
-		control::addSlide();
+		display::deleteDisplay();
 
-		createArray(texts, rectangles);
+		Layer layer;
+		layer.addArray(arr);
+		display::addLayer(layer);
+		display::start();
 	}
 
-	void updateSlides(std::string _pos, std::string _val, std::vector<std::vector<sf::Text>>& texts, std::vector<std::vector<sf::RectangleShape>>& rectangles) {
-		if (arr.empty()) return;
+	void Update(std::string _pos, std::string _val) {
 		int pos, val;
 		if (!format::toInt(_pos, pos)) return;
 		if (!format::toInt(_val, val)) return;
-		if (pos < 1 || pos >(int)arr.size()) return;
+		if (_pos == "") return;
 
-		if (!val) val = rand() % 100;
-		texts.clear();
-		rectangles.clear();
+		if (pos < 0 || pos >= arr.size()) return;
+		if (_val == "") val = rand() % 100;
 
-		source::clear();
-		source::setSource({ "arr[pos] = val" });
+		display::deleteDisplay();
 
-		control::clear();
-		control::start();
-		for (int i = 0; i < 3; ++i) {
-			control::addSlide();
-			control::addCheckpoint();
-		}
-		createArray(texts, rectangles);
+		display::addSource({ "a[Pos] = Value" });
+		display::addSourceOrder({-1, 0, -1});
 
-		for (int i = 0; i < 2; ++i) {
-			texts.push_back(texts[0]);
-			rectangles.push_back(rectangles[0]);
-		}
-		rectangles[1][pos - 1].setFillColor(layout::display::targetColor);
-		display::setTextRectangle(texts[2][pos - 1],rectangles[2][pos - 1], format::toString(val));
-		arr[pos - 1] = val;
+		Layer layer;
+		layer.addArray(arr);
+		display::addLayer(layer);
+
+		layer.arr[pos].beTarget();
+		display::addLayer(layer);
+
+		layer.arr[pos].beNormal();
+		layer.arr[pos].setValue(val);
+		display::addLayer(layer);
+
+		display::start();
+		arr[pos] = val;
 	}
 
 	void run(sf::RenderWindow& window, sf::Event event) {
-		std::vector<std::string> get(0);
-		if (functions[0].run(window, event, get)) createSlides(get[0], get[1], display::texts, display::rectangles);
-		if (functions[1].run(window, event, get)) updateSlides(get[0], get[1], display::texts, display::rectangles);
+		std::vector<std::string> get;
+		if (create.run(window, event, get)) Create(get[0], get[1]);
+		if (update.run(window, event, get)) Update(get[0], get[1]);
 		display::run(window, event);
 	}
 
 	void draw(sf::RenderWindow& window) {
-		for (Function& func : functions)
-			if (!func.functionButton.isPressed() && !func.functionButton.isFocused())
-				func.draw(window);
-		for (Function& func : functions)
-			if (func.functionButton.isPressed() || func.functionButton.isFocused())
-				func.draw(window);
+		create.draw(window);
+		update.draw(window);
 
-		display::displayAll(window);
+		if (create.functionButton.isPressed() || create.functionButton.isFocused()) create.draw(window);
+		if (update.functionButton.isPressed() || update.functionButton.isFocused()) update.draw(window);
+
+		display::draw(window);
 	}
 }
 

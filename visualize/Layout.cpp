@@ -43,10 +43,10 @@ namespace layout {
 	namespace sourceWindow {
 		sf::Vector2f size(400, functionWindow::size.y);
 		sf::Vector2f pos(0, functionWindow::pos.y);
-		sf::Vector2f blockSize(size.x, 50);
+		sf::Vector2f blockSize(size.x, 30);
 		sf::RectangleShape shape;
 
-		int fontSize = 30;
+		int fontSize = 20;
 	}
 
 	namespace displayWindow {
@@ -56,7 +56,7 @@ namespace layout {
 	}
 
 	namespace structuresBar {
-		std::vector<std::string> labels = { "Static Array", "Dyamic Array", "Linked List (LL)", "Doubly LL" , "Circular LL", "Queue", "Stack" };
+		std::vector<std::string> labels = { "Static Array", "Dynamic Array", "Linked List (LL)", "Doubly LL" , "Circular LL", "Queue", "Stack" };
 
 		sf::Vector2f pos(0, 0);
 		sf::Vector2f blockSize(Width / 7, 50);
@@ -74,6 +74,15 @@ namespace layout {
 
 		sf::Vector2f arrayBlockSize(50, 50);
 		sf::RectangleShape arrayBlock;
+		sf::CircleShape linkedListBlock;
+	}
+
+
+	namespace arrow {
+		std::string txt[3] = { "arrow/arrow.png",
+						       "Arrow/greenarrow.png",
+						       "Arrow/redarrow.png", };
+		sf::Texture t[3];
 	}
 
 	void setRectangle(sf::RectangleShape& rect, sf::Vector2f pos, sf::Vector2f size, sf::Color backColor, int outThick, sf::Color outColor) {
@@ -90,8 +99,16 @@ namespace layout {
 		setRectangle(functionWindow::shape, functionWindow::pos, functionWindow::size, sf::Color::Transparent, 1, sf::Color::Black);
 		setRectangle(sourceWindow::shape, sourceWindow::pos, sourceWindow::size, sf::Color::Transparent, 1, sf::Color::Black);
 		setRectangle(displayWindow::shape, displayWindow::pos, displayWindow::size, sf::Color::Transparent, 1, sf::Color::Black);
-		setRectangle(display::arrayBlock, sf::Vector2f(0, 0), display::arrayBlockSize, sf::Color::Transparent, 1, sf::Color::Black);
+		setRectangle(display::arrayBlock, sf::Vector2f(0, 0), display::arrayBlockSize, sf::Color::White, 1, sf::Color::Black);
+
+		display::linkedListBlock.setRadius(display::arrayBlockSize.x / 2);
+		display::linkedListBlock.setFillColor(sf::Color::White);
+		display::linkedListBlock.setOutlineThickness(2);
+		display::linkedListBlock.setOutlineColor(sf::Color::Black);
 
 		structuresBar::bar.create(layout::structuresBar::pos, layout::structuresBar::blockSize, style::button::faces, layout::structuresBar::labels, layout::structuresBar::direction, layout::structuresBar::charSize);
+		
+		for (int i = 0; i < 3; ++i)
+			arrow::t[i].loadFromFile(arrow::txt[i]);
 	}
 }

@@ -37,6 +37,12 @@
     <Filter Include="Source Files\InternalToolsFunction">
       <UniqueIdentifier>{02d27828-10c4-4dde-b626-835d44e74940}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\DisplayElement">
+      <UniqueIdentifier>{c1502887-e551-4318-af45-adbc874b9a7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DisplayElementsFuntion">
+      <UniqueIdentifier>{2e66350f-fac1-4bed-b327-02d08dc57d01}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -93,6 +99,24 @@
     <ClCompile Include="Source.cpp">
       <Filter>Source Files\InternalToolsFunction</Filter>
     </ClCompile>
+    <ClCompile Include="DynamicArray.cpp">
+      <Filter>Source Files\StructsFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="ArrayNode.cpp">
+      <Filter>Source Files\DisplayElementsFuntion</Filter>
+    </ClCompile>
+    <ClCompile Include="LinkedListNode.cpp">
+      <Filter>Source Files\DisplayElementsFuntion</Filter>
+    </ClCompile>
+    <ClCompile Include="Layer.cpp">
+      <Filter>Source Files\DisplayElementsFuntion</Filter>
+    </ClCompile>
+    <ClCompile Include="Arrow.cpp">
+      <Filter>Source Files\DisplayElementsFuntion</Filter>
+    </ClCompile>
+    <ClCompile Include="LinkedList.cpp">
+      <Filter>Source Files\StructsFunction</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Button.h">
@@ -148,6 +172,24 @@
     </ClInclude>
     <ClInclude Include="Source.h">
       <Filter>Header Files\InternalTools</Filter>
+    </ClInclude>
+    <ClInclude Include="DynamicArray.h">
+      <Filter>Header Files\Structs</Filter>
+    </ClInclude>
+    <ClInclude Include="ArrayNode.h">
+      <Filter>Header Files\DisplayElement</Filter>
+    </ClInclude>
+    <ClInclude Include="LinkedListNode.h">
+      <Filter>Header Files\DisplayElement</Filter>
+    </ClInclude>
+    <ClInclude Include="Arrow.h">
+      <Filter>Header Files\DisplayElement</Filter>
+    </ClInclude>
+    <ClInclude Include="Layer.h">
+      <Filter>Header Files\DisplayElement</Filter>
+    </ClInclude>
+    <ClInclude Include="LinkedList.h">
+      <Filter>Header Files\Structs</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

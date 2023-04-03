@@ -28,7 +28,7 @@ namespace source {
 			texts[i].setCharacterSize(layout::sourceWindow::fontSize);
 			sf::FloatRect textRect = texts[i].getLocalBounds();
 			//texts[i].setOrigin(sf::Vector2f(0, textRect.height / 2));
-			texts[i].setPosition(pos.x, pos.y + 3);// +layout::sourceWindow::blockSize.y / 2.0);
+			texts[i].setPosition(pos.x + 2, pos.y + 2);// +layout::sourceWindow::blockSize.y / 2.0);
 			texts[i].setFillColor(sf::Color::Black);
 			texts[i].setString("");
 		}
@@ -48,6 +48,7 @@ namespace source {
 	}
 
 	void hightlight(int pos) {
+		if (rects.empty()) return;
 		rects[hightlightPos].setFillColor(sf::Color::White);
 		if (pos < 0 || pos >= lineCount) return;
 		hightlightPos = pos;
