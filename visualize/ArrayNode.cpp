@@ -45,7 +45,7 @@ void ArrayNode::draw(sf::RenderWindow& window)
 }
 
 void ArrayNode::beNormal() {
-	bound.setFillColor(sf::Color::White);
+	bound.setFillColor(layout::display::normalColor);
 }
 
 void ArrayNode::beTarget() {

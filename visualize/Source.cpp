@@ -28,7 +28,7 @@ namespace source {
 			texts[i].setCharacterSize(layout::sourceWindow::fontSize);
 			sf::FloatRect textRect = texts[i].getLocalBounds();
 			//texts[i].setOrigin(sf::Vector2f(0, textRect.height / 2));
-			texts[i].setPosition(pos.x + 2, pos.y + 2);// +layout::sourceWindow::blockSize.y / 2.0);
+			texts[i].setPosition(pos.x + 10, pos.y - 2);// +layout::sourceWindow::blockSize.y / 2.0);
 			texts[i].setFillColor(sf::Color::Black);
 			texts[i].setString("");
 		}
@@ -38,6 +38,7 @@ namespace source {
 			texts[i].setString("");
 			rects[i].setFillColor(sf::Color::White);
 		}
+		lineCount = 0;
 	}
 
 	void setSource(std::vector<std::string> strs) {

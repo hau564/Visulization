@@ -12,6 +12,7 @@ namespace control {
 	extern ButtonImage nextStep, prevStep;
 	extern ButtonImage toEnd, toStart;
 	extern Slider speed;
+	extern sf::Text speedText;
 
 	extern void init();
 	extern void run(sf::RenderWindow& window, sf::Event event);

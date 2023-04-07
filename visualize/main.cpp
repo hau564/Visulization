@@ -56,7 +56,9 @@ void draw(sf::RenderWindow& window, std::string s) {
     
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(style::Width, style::Height), "Visualize");
+    sf::ContextSettings settings;
+    settings.antialiasingLevel = 5.0;
+    sf::RenderWindow window(sf::VideoMode(style::Width, style::Height), "Visualize", sf::Style::Default,settings);
     window.setFramerateLimit(30);
     initVariables();
 

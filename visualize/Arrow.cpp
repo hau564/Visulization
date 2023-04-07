@@ -30,7 +30,7 @@ void Arrow::create(sf::Vector2f pos1, sf::Vector2f pos2, int k) {
 
 		float angle = acos(dx / d) / PI * 180.0;
 		if (dy < 0) angle = -angle;
-		s[i].rotate(angle);
+		s[i].setRotation(angle);
 	}
 }
 

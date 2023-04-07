@@ -40,11 +40,6 @@ namespace display {
 	void draw(sf::RenderWindow& window) {
 		control::update();
 
-		window.draw(layout::sourceWindow::shape);
-		window.draw(layout::controlWindow::shape);
-		window.draw(layout::displayWindow::shape);
-		window.draw(layout::functionWindow::shape);
-
 		if (!control::slideTime.empty())
 			control::draw(window);	
 		
@@ -54,5 +49,13 @@ namespace display {
 		source::draw(window);
 
 		if (!layers.empty()) layers[id].draw(window);
+
+		if (source::lineCount) {
+			//layout::sourceWindow::shape.setSize(sf::Vector2f(layout::sourceWindow::size.x, layout::sourceWindow::blockSize.y * source::lineCount));
+			window.draw(layout::sourceWindow::shape);
+		}
+		window.draw(layout::controlWindow::shape);
+		window.draw(layout::displayWindow::shape);
+		window.draw(layout::functionWindow::shape);
 	}
 }

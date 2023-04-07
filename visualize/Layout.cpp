@@ -41,16 +41,16 @@ namespace layout {
 	}
 
 	namespace sourceWindow {
-		sf::Vector2f size(400, functionWindow::size.y);
-		sf::Vector2f pos(0, functionWindow::pos.y);
+		sf::Vector2f size(600, 300);
+		sf::Vector2f pos(0, Height - controlWindow::size.y - size.y);// functionWindow::pos.y);
 		sf::Vector2f blockSize(size.x, 30);
 		sf::RectangleShape shape;
 
-		int fontSize = 20;
+		int fontSize = 25;
 	}
 
 	namespace displayWindow {
-		sf::Vector2f size(Width - functionWindow::size.x - sourceWindow::size.x, functionWindow::size.y);
+		sf::Vector2f size(Width - functionWindow::size.x, functionWindow::size.y);
 		sf::Vector2f pos(functionWindow::pos.x - size.x, functionWindow::pos.y);
 		sf::RectangleShape shape;
 	}
@@ -67,7 +67,7 @@ namespace layout {
 
 	namespace display {
 
-		sf::Color normalColor = sf::Color::Black;
+		sf::Color normalColor = sf::Color::White;
 		sf::Color visitedColor = sf::Color::Cyan;
 		sf::Color considerColor = sf::Color::Blue;
 		sf::Color targetColor = sf::Color::Green;

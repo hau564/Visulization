@@ -73,8 +73,8 @@ namespace dynamicArray {
 	void Grow() {
 		display::deleteDisplay();
 
-		display::addSource({"int *newA = New int[2*n]",
-							"for i in [0;n-1]: newA[i] = a[i]",
+		display::addSource({"int *newA = New int[2 * N]",
+							"for i from 0 to N - 1: newA[i] = a[i]",
 							"delete [] a",
 							"a = newA"});
 		display::addSourceOrder({ -1, 0, 1, 2, 3, -1 });
@@ -119,7 +119,9 @@ namespace dynamicArray {
 		std::vector<std::string> get;
 		if (create.run(window, event, get)) Create(get[0], get[1]);
 		if (update.run(window, event, get)) Update(get[0], get[1]);
-		if (grow.run(window, event) == Button::pressed) Grow();
+
+		grow.run(window, event);
+		if (grow.justPressed()) Grow();
 		display::run(window, event);
 	}
 

@@ -1,11 +1,13 @@
 #include "Control.h"
 #include "Layout.h"
+#include "Format.h"
 
 namespace control {
 	ButtonImage play;
 	ButtonImage prev, next;
 	ButtonImage toStart, toEnd;
 	Slider speed;
+	sf::Text speedText;
 
 	void init()
 	{
@@ -14,7 +16,21 @@ namespace control {
 		next.create(layout::controlWindow::nextPos, layout::controlWindow::nextSize, { "images/next.png" });
 		toStart.create(layout::controlWindow::toStartPos, layout::controlWindow::toStartSize, { "images/toStart.png" });
 		toEnd.create(layout::controlWindow::toEndPos, layout::controlWindow::toEndSize, { "images/toEnd.png" });
-		speed.create(layout::controlWindow::speedPos, layout::controlWindow::speedSize, layout::controlWindow::speedBack, layout::controlWindow::speedSele, 0.5);
+		speed.create(layout::controlWindow::speedPos, layout::controlWindow::speedSize, layout::controlWindow::speedBack, layout::controlWindow::speedSele, 0);
+
+		speedText.setFont(layout::font);
+		speedText.setCharacterSize(25);
+		speedText.setString("x1");
+
+		sf::FloatRect rect = speedText.getLocalBounds();
+		speedText.setOrigin(0, rect.height / 2 + 10);
+		speedText.setPosition(layout::controlWindow::speedPos + sf::Vector2f(layout::controlWindow::speedSize.x + 7, layout::controlWindow::speedSize.y / 2));
+		
+		speedText.setFillColor(sf::Color::Black);
+	}
+
+	float getSpeed() {
+		return (speed.get() / (0.1)) + 1.0000001;
 	}
 
 	void runObjects(sf::RenderWindow& window, sf::Event event) {
@@ -26,9 +42,9 @@ namespace control {
 
 		speed.run(window, event);
 		speed.round(0.1);
-		if (speed.get() < 0.1) speed.setSelected(0.1);
+		//if (speed.get() < 0.1) speed.setSelected(0.1);
+		speedText.setString("x" + format::toString(getSpeed()));
 	}
-
 
 	int slideId = -1;
 	float timePerSlide = 1.0;
@@ -65,7 +81,7 @@ namespace control {
 		}
 		cur = 1.0 * clock() / CLOCKS_PER_SEC;
 
-		if (cur - slideStart > slideTime[slideId] / (speed.get() * 2.0)) {
+		if (cur - slideStart > slideTime[slideId] / getSpeed()) {
 			++slideId;
 			if (slideId > (int)slideTime.size() - 1) {
 				slideId = (int)slideTime.size() - 1;
@@ -102,7 +118,7 @@ namespace control {
 			slideStart = 1.0 * clock() / CLOCKS_PER_SEC - (cur - slideStart);
 		}
 		cur = 1.0 * clock() / CLOCKS_PER_SEC;
-		if (cur - slideStart > slideTime[slideId] / (speed.get() * 2.0)) {
+		if (cur - slideStart > slideTime[slideId] / getSpeed()) {
 			++slideId;
 			if (slideId > (int)slideTime.size() - 1) {
 				slideId = (int)slideTime.size() - 1;
@@ -126,5 +142,6 @@ namespace control {
 		toStart.draw(window);
 		toEnd.draw(window);
 		speed.draw(window);
+		window.draw(speedText);
 	}
 }

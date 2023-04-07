@@ -8,7 +8,7 @@ void Layer::addArray(std::vector<int> a, sf::Vector2f pos)
 	
 	int length = layout::display::arrayBlockSize.x * n;
 	if (!pos.x) pos.x = layout::displayWindow::pos.x + layout::displayWindow::size.x / 2 - length / 2;
-	if (!pos.y) pos.y = layout::displayWindow::pos.y + layout::displayWindow::size.y / 2 - layout::display::arrayBlockSize.y / 2;
+	if (!pos.y) pos.y = layout::displayWindow::pos.y + layout::displayWindow::size.y / 2 - layout::display::arrayBlockSize.y / 2 - up;
 	
 	for (int i = 0; i < n; ++i) {
 		arr.push_back(ArrayNode(pos + sf::Vector2f(i * layout::display::arrayBlockSize.x, 0), a[i]));
@@ -24,7 +24,7 @@ void Layer::addLinkedList(std::vector<int> llist, sf::Vector2f pos)
 	
 	int length = (n - 1) * (arrowLength + layout::display::arrayBlockSize.x) + layout::display::arrayBlockSize.x;
 	if (!pos.x) pos.x = layout::displayWindow::pos.x + layout::displayWindow::size.x / 2 - length / 2;
-	if (!pos.y) pos.y = layout::displayWindow::pos.y + layout::displayWindow::size.y / 2 - layout::display::arrayBlockSize.y / 2;
+	if (!pos.y) pos.y = layout::displayWindow::pos.y + layout::displayWindow::size.y / 2 - layout::display::arrayBlockSize.y / 2 - up;
 	
 	for (int i = 0; i < n; ++i) {
 		list.push_back(LinkedListNode(pos + sf::Vector2f(i * (arrowLength + layout::display::arrayBlockSize.x), 0), llist[i]));
