@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Animation.cpp" />
     <ClCompile Include="ArrayNode.cpp" />
     <ClCompile Include="Arrow.cpp" />
     <ClCompile Include="Button.cpp" />
@@ -157,6 +158,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MenuBar.cpp" />
     <ClCompile Include="MousePos.cpp" />
+    <ClCompile Include="Queue.cpp" />
     <ClCompile Include="Slider.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="StaticArray.cpp" />
@@ -165,6 +167,7 @@
     <ClCompile Include="Textbox.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Animation.h" />
     <ClInclude Include="Arrow.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="ButtonImage.h" />
@@ -179,6 +182,7 @@
     <ClInclude Include="Layer.h" />
     <ClInclude Include="LinkedList.h" />
     <ClInclude Include="LinkedListNode.h" />
+    <ClInclude Include="Queue.h" />
     <ClInclude Include="Source.h" />
     <ClInclude Include="Layout.h" />
     <ClInclude Include="MousePos.h" />

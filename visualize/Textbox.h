@@ -13,10 +13,23 @@ public:
 	Button buttonText;
 	int isActive = 0, lengthLimit, textLengthLimit;
 
+	sf::Vector2f pos, size;
+
 	Textbox() {};
-	void create(sf::Vector2f pos, sf::Vector2f size, std::string textStr, int _lengthLimit = 1000000000, std::string charSet = "", int charSize = 0);
+	void create(sf::Vector2f _pos, sf::Vector2f _size, std::string textStr, int _lengthLimit = 1000000000, std::string charSet = "", int charSize = 0);
 	void run(sf::RenderWindow& window, sf::Event event);
 	void draw(sf::RenderWindow& window);
+
+	std::vector<std::string> recommendString, onRecommend;
+	sf::Text recommendText;
+	sf::Vector2f rTextPos;
+	sf::RectangleShape recommendShape, hightlightShape;
+	int hightlightId;
+	
+	void addStringRecommend(std::vector<std::string> texts);
+	bool runRecommend(sf::RenderWindow& window, sf::Event event);
+	void drawRecommend(sf::RenderWindow &window);
+
 	void clear();
 	void applyText();
 };

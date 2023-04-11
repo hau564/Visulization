@@ -2,6 +2,7 @@
 #include "Layout.h"
 #include "Display.h"
 #include "Format.h"
+#include "Animation.h"
 
 namespace linkedList {
 	std::vector<int> list;
@@ -12,6 +13,9 @@ namespace linkedList {
 		insert.create(layout::functionWindow::pos + sf::Vector2f(0, 1*layout::functionWindow::blockSize.y), layout::functionWindow::blockSize, "Insert", { "Pos: ", "Value: "});
 		del.create(layout::functionWindow::pos + sf::Vector2f(0,  2 * layout::functionWindow::blockSize.y), layout::functionWindow::blockSize, "Delete", { "Pos: "});
 		search.create(layout::functionWindow::pos + sf::Vector2f(0, 3*layout::functionWindow::blockSize.y), layout::functionWindow::blockSize, "Search", { "First of: "});
+
+		del.textboxes[0].addStringRecommend({ "0123", "head", "tail" });
+		insert.textboxes[0].addStringRecommend({ "0123", "head", "tail" });
 	}
 
 	void Create(std::string _n, std::string _values) {
@@ -29,21 +33,233 @@ namespace linkedList {
 				list.push_back(0);
 		}
 
-		if (!n) return;
-
 		display::deleteDisplay();
 
 		Layer layer;
 		layer.addLinkedList(list);
-		layer.addTextAbove("head", layer.list[0], {-30, -30});
-		layer.addTextAbove("tail", layer.list.back(), {30, -30});
+		if (list.size()) {
+			layer.addTextAbove("head", layer.list[0], {-30, -30});
+			layer.addTextAbove("tail", layer.list.back(), {30, -30});
+		}
 		display::addLayer(layer);		
 		
 		display::start();
 	}
 
-	void Insert(std::string _pos, std::string _val) {
+	void insertHead(int val) {
+		display::deleteDisplay();
+		display::addSource({"temp = new node(val)",
+							"temp->next = head",
+							"head = temp" });
 
+
+		Layer layer;
+		std::vector<int> ord;
+
+		if (list.size()) {
+			layer.addLinkedList(list);
+			layer.addTextAbove("head", layer.list[0], { -30, -30 });
+			layer.addTextAbove("tail", layer.list.back(), { 30, -30 });
+		}
+		display::addLayer(layer);
+		ord.push_back(-1);
+		display::addLayer(layer);
+		ord.push_back(0);
+
+		sf::Vector2f pos;
+		if (list.size()) 
+			pos = layer.list[0].getPosition() + sf::Vector2f(- 2 * layout::display::arrayBlockSize.x, 0);
+		else 
+			pos = layout::displayWindow::pos + sf::Vector2f(layout::displayWindow::size.x / 2, layout::displayWindow::size.y / 2 - 50);
+		layer.list.push_back(LinkedListNode(pos, val));
+		layer.addTextAbove("temp", layer.list.back(), { 0, 50 });
+		
+		display::addLayer(layer);
+		ord.push_back(1);
+
+		if (list.size()) 
+			layer.arrow.push_back(Arrow(layer.list.back(), layer.list[0]));
+		display::addLayer(layer);
+		ord.push_back(2);
+
+		layer.addTextAbove("head", layer.list.back(), { -30, -30 });
+		if (list.size()) {
+			std::swap(layer.text[0], layer.text.back());
+			layer.text.pop_back();
+		}
+		display::addLayer(layer);
+		ord.push_back(-1);
+
+		list.push_back(0);
+		for (int i = (int)list.size() - 1; i; --i)
+			list[i] = list[i - 1];
+		list[0] = val;
+		layer.clear();
+		layer.addLinkedList(list);
+		layer.addTextAbove("head", layer.list[0], { -30, -30 });
+		layer.addTextAbove("tail", layer.list.back(), { 30, -30 });
+
+		display::addLayer(layer);
+		ord.push_back(-1);
+		
+		display::addSourceOrder(ord);
+		display::start();
+	}
+	void insertTail(int val) {
+		if (list.empty()) {
+			insertHead(val);
+			return;
+		}
+		display::deleteDisplay();
+		display::addSource({"tail->next = new node(val)",
+							"tail = tail.next" });
+
+		Layer layer;
+		std::vector<int> ord;
+
+		layer.addLinkedList(list);
+		layer.addTextAbove("head", layer.list[0], { -30, -30 });
+		layer.addTextAbove("tail", layer.list.back(), { 30, -30 });
+
+		display::addLayer(layer);
+		ord.push_back(-1);
+		display::addLayer(layer);
+		ord.push_back(0);
+
+		list.push_back(val);
+		layer.clear();
+		layer.addLinkedList(list);
+		layer.addTextAbove("head", layer.list[0], { -30, -30 });
+		layer.addTextAbove("tail", layer.list.end()[-2], { 30, -30 });
+		display::addLayer(layer);
+		ord.push_back(1);
+
+		layer.clear();
+		layer.addLinkedList(list);
+		layer.addTextAbove("head", layer.list[0], { -30, -30 });
+		layer.addTextAbove("tail", layer.list.back(), { 30, -30 });
+		display::addLayer(layer);
+		ord.push_back(-1);
+
+		display::addSourceOrder(ord);
+		display::start();
+	}
+	void Insert(std::string _pos, std::string _val) {
+		int pos, val;
+		if (!format::toInt(_val, val)) return;
+		if (_val == "") val = rand() % 100;
+
+		if (_pos == "head") insertHead(val);
+		if (_pos == "tail") insertTail(val);
+		if (!format::toInt(_pos, pos)) return;
+		if (pos == 0) return insertHead(val);
+		if (pos == (int)list.size()) return insertTail(val);
+
+		display::deleteDisplay();
+		display::addSource({"if Pos not in [0;N-1]: return",
+							"cur = head",
+							"for i = 1 to Pos - 1:",
+							"     cur = cur->next",
+							"temp = new Node(val)",
+							"temp->next = cur->next",
+							"cur->next = temp" });
+
+		Layer layer;
+		std::vector<int> ord;
+
+		layer.addLinkedList(list);
+		if (list.size()) {
+			layer.addTextAbove("head", layer.list[0], { -30, -30 });
+			layer.addTextAbove("tail", layer.list.back(), { 30, -30 });
+		}
+		display::addLayer(layer);
+		ord.push_back(-1);
+		display::addLayer(layer);
+		ord.push_back(0);
+		if (pos < 0 || pos >(int)list.size()) {
+			display::addLayer(layer);
+			ord.push_back(-1);
+			display::addSourceOrder(ord);
+			display::start();
+			return;
+		}
+		display::addLayer(layer);
+		ord.push_back(1);
+
+		layer.addTextAbove("cur", layer.list[0], { 0, 50 });
+		layer.list[0].beTarget();
+		int cur = 0;
+		for (int i = 1; i < pos; ++i) {
+			display::addLayer(layer);
+			ord.push_back(2);
+			layer.list[cur + 1].beVisited();
+			display::addLayer(layer);
+			ord.push_back(3);
+
+			layer.list[cur].beNormal();
+			layer.list[++cur].beTarget();
+			layer.text.pop_back();
+			layer.addTextAbove("cur", layer.list[cur], { 0, 50 });
+		}
+
+		display::addLayer(layer);
+		ord.push_back(2);
+		display::addLayer(layer);
+		ord.push_back(4);
+
+		layer.list.push_back(LinkedListNode(layer.list[cur + 1].getPosition() + sf::Vector2f(0, -100), val));
+		layer.addTextAbove("temp", layer.list.back(), {0, -30});
+		display::addLayer(layer);
+		ord.push_back(5);
+
+		layer.arrow.push_back(Arrow(layer.list.back(), layer.list[cur + 1]));
+		display::addLayer(layer);
+		ord.push_back(6);
+
+		layer.arrow[cur] = Arrow(layer.list[cur], layer.list.back());
+		display::addLayer(layer);
+		ord.push_back(-1);
+
+		list.push_back(0);
+		for (int i = (int)list.size() - 1; i > pos; --i)
+			list[i] = list[i - 1];
+		list[pos] = val;
+
+		Layer layer1;
+		layer1.addLinkedList(list);
+		layer1.addTextAbove("head", layer1.list[0], { -30, -30 });
+		layer1.addTextAbove("tail", layer1.list.back(), { 30, -30 });
+
+		Layer layerTrans = layer1;
+		int slideCnt = 20;
+		layer.text.pop_back();
+		layer.list[cur].beNormal();
+		for (int r = 0; r < slideCnt; ++r) {
+			double rate = 1.0 * r / slideCnt;
+			for (int i = 0; i <= cur; ++i) {
+				layerTrans.list[i] = animation::getObj(layer.list[i], layer1.list[i], rate);
+				layerTrans.arrow[i] = animation::getArrow(layer.arrow[i], layer1.arrow[i], rate);
+			}
+			layerTrans.list[cur + 1] = animation::getObj(layer.list.back(), layer1.list[cur + 1], rate);
+			layerTrans.arrow[cur + 1] = animation::getArrow(layer.arrow.back(), layer1.arrow[cur + 1], rate);
+			layerTrans.text[0] = animation::getObj(layer.text[0], layer1.text[0], rate);
+			layerTrans.text[1] = animation::getObj(layer.text[1], layer1.text[1], rate);
+
+			for (int i = cur + 2; i < (int)list.size();++i) {
+				layerTrans.list[i] = animation::getObj(layer.list[i - 1], layer1.list[i], rate);
+				if (i < (int)list.size() - 1)
+					layerTrans.arrow[i] = animation::getArrow(layer.arrow[i - 1], layer1.arrow[i], rate);
+			}
+
+			display::addLayer(layerTrans, 1.0 / slideCnt, (r == 0));
+			ord.push_back(-1);
+		}
+
+		display::addLayer(layer1);
+		ord.push_back(-1);
+
+		display::addSourceOrder(ord);
+		display::start();
 	}
 
 	void DeleteHead() {
@@ -132,7 +348,7 @@ namespace linkedList {
 							"while temp->next->next != null:",
 							"     temp = temp->next",
 							"tail = temp",
-							"delete temp->next, temp->next = null" });
+							"delete tail->next, tail->next = null" });
 
 		if (list.empty()) {
 			for (int i = 0; i < 3; ++i) {
@@ -286,8 +502,6 @@ namespace linkedList {
 		display::addLayer(layer);
 		ord.push_back(5);
 
-		std::cout << layer.list[cur].getPosition().x << " " << layer.list[cur].getPosition().y << "\n";
-		std::cout << layer.list[cur + 2].getPosition().x << " " << layer.list[cur + 2].getPosition().y << "\n";
 		layer.arrow[cur].create(layer.list[cur], layer.list[cur + 2]);
 		display::addLayer(layer);
 		ord.push_back(6);
@@ -345,6 +559,7 @@ namespace linkedList {
 		while (cur < (int)list.size() && list[cur] != x) {
 			layer.list[cur].beTarget();
 			for (int i = 1; i < 3; ++i) {
+				if (i != 1 && cur < (int)layer.list.size() - 1) layer.list[cur + 1].beVisited();
 				display::addLayer(layer);
 				ord.push_back(i);
 			}

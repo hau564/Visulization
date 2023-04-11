@@ -10,6 +10,8 @@ public:
 	template<class Obj1, class Obj2>
 	Arrow(Obj1 o1, Obj2 o2);
 
+	sf::Vector2f startPos, endPos;
+
 	template<class Obj1, class Obj2>
 	void create(Obj1 o1, Obj2 o2);
 

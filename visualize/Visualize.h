@@ -18,6 +18,7 @@
 #include "Display.h"
 #include "Control.h"
 #include "Source.h"
+#include "Animation.h"
 
 #include "ArrayNode.h"
 #include "LinkedListNode.h"
@@ -27,3 +28,4 @@
 #include "StaticArray.h"
 #include "DynamicArray.h"
 #include "LinkedList.h"
+#include "Queue.h"

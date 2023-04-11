@@ -20,12 +20,12 @@ namespace control {
 	extern void update();
 
 	extern int slideId;
-	extern float timePerSlide;
-	extern float slideStart, cur;
-	extern std::vector<float> slideTime;
+	extern double timePerSlide;
+	extern double slideStart, cur;
+	extern std::vector<double> slideTime;
 	extern std::vector<int> checkpoint;
 	
-	extern void addSlide(float weight = 1.0);
+	extern void addSlide(double weight = 1.0);
 	extern void addCheckpoint();
 	extern void clear();
 	extern void start();

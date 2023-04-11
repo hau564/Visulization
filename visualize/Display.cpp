@@ -18,7 +18,7 @@ namespace display {
 	}
 
 	void addLayer(Layer layer, float weight, int checkPoint) {
-		control::addSlide();
+		control::addSlide(weight);
 		if (checkPoint) control::addCheckpoint();
 		layers.push_back(layer);
 	}

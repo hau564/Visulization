@@ -18,20 +18,35 @@ void Function::create(sf::Vector2f pos, sf::Vector2f size, std::string label, st
 bool Function::run(sf::RenderWindow& window, sf::Event event, std::vector<std::string>& get)
 {
 	if (active || functionButton.run(window, event) == Button::pressed) {
-		for (Textbox& tbox : textboxes)
+		int textboxActive = 0;
+		for (Textbox& tbox : textboxes) {
 			tbox.run(window, event);
-		if (go.run(window, event) == Button::pressed) {	
-			for (Textbox& tbox : textboxes) {
-				get.push_back(tbox.inputString);
-				tbox.clear();
+			if (textboxActive) {
+				if (tbox.buttonText.isPressed()) {
+					tbox.buttonText.state = Button::focused;
+				}
 			}
-			functionButton.run(window, event);
-			active = 0;
-			return true;
+			if (tbox.buttonText.isPressed()) {
+				textboxActive = 1;
+			}
+		}
+		if (go.run(window, event) == Button::pressed) {	
+			if (textboxActive) {
+				if (go.isPressed()) go.state = Button::focused;
+			}
+			else {
+				for (Textbox& tbox : textboxes) {
+					get.push_back(tbox.inputString);
+					tbox.clear();
+				}
+				functionButton.run(window, event);
+				active = 0;
+				return true;
+			}
 		}
 		sf::Vector2f mousePos = getMousePos(window);
 		if (active && event.type == sf::Event::MouseButtonPressed) {
-			int stillActive = 0;
+			int stillActive = textboxActive;
 			for (Textbox& tbox : textboxes)
 				stillActive |= tbox.box.contains(mousePos);
 			active = stillActive;
@@ -46,9 +61,9 @@ void Function::draw(sf::RenderWindow& window)
 {
 	functionButton.draw(window);
 	if (active) {
-		for (Textbox& tbox : textboxes)
-			tbox.draw(window);
 		go.draw(window);
+		for (int i = (int)textboxes.size() - 1; i >= 0; --i)
+			textboxes[i].draw(window);
 	}
 }
 

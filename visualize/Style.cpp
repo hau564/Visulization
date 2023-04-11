@@ -34,17 +34,17 @@ namespace style {
 		namespace textButton {
 			ButtonFace normal{
 				2,
-				sf::Color::Transparent,
+				sf::Color::White,
 				sf::Color::Black
 			};
 			ButtonFace focused{
 				3,
-				sf::Color::Transparent,
+				sf::Color::White,
 				sf::Color::Black
 			};
 			ButtonFace pressed{
 				4,
-				sf::Color::Transparent,
+				sf::Color::White,
 				sf::Color::Black
 			};
 			ButtonFace disabled{

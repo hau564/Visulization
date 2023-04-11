@@ -56,6 +56,16 @@ void ArrayNode::beVisited() {
 	bound.setFillColor(layout::display::visitedColor);
 }
 
+void ArrayNode::setPosition(sf::Vector2f pos)
+{
+	sf::Vector2f size = layout::display::arrayBlockSize;
+	bound.setPosition(pos);
+
+	sf::FloatRect textRect = text.getLocalBounds();
+	text.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
+	text.setPosition(sf::Vector2f(pos.x + size.x / 2.0f, pos.y + size.y / 2.0f));
+}
+
 sf::Vector2f ArrayNode::getPosition() {
 	return bound.getPosition();
 }

@@ -29,7 +29,7 @@ namespace control {
 		speedText.setFillColor(sf::Color::Black);
 	}
 
-	float getSpeed() {
+	double getSpeed() {
 		return (speed.get() / (0.1)) + 1.0000001;
 	}
 
@@ -47,12 +47,12 @@ namespace control {
 	}
 
 	int slideId = -1;
-	float timePerSlide = 1.0;
-	float slideStart, cur;
-	std::vector<float> slideTime;
+	double timePerSlide = 1.0;
+	double slideStart, cur;
+	std::vector<double> slideTime;
 	std::vector<int> checkpoint;
 
-	void addSlide(float weight) {
+	void addSlide(double weight) {
 		slideTime.push_back(timePerSlide * weight);
 	}
 
@@ -81,13 +81,13 @@ namespace control {
 		}
 		cur = 1.0 * clock() / CLOCKS_PER_SEC;
 
-		if (cur - slideStart > slideTime[slideId] / getSpeed()) {
+		if (cur - slideStart >= slideTime[slideId] / getSpeed()) {
+			slideStart += slideTime[slideId] / getSpeed();
 			++slideId;
 			if (slideId > (int)slideTime.size() - 1) {
 				slideId = (int)slideTime.size() - 1;
 				play.state = ButtonImage::pressed;
 			}
-			slideStart = cur;
 		}
 		if (toStart.justPressed()) {
 			slideId = 0;
@@ -118,13 +118,13 @@ namespace control {
 			slideStart = 1.0 * clock() / CLOCKS_PER_SEC - (cur - slideStart);
 		}
 		cur = 1.0 * clock() / CLOCKS_PER_SEC;
-		if (cur - slideStart > slideTime[slideId] / getSpeed()) {
+		if (cur - slideStart >= slideTime[slideId] / getSpeed()) {
+			slideStart += slideTime[slideId] / getSpeed();
 			++slideId;
 			if (slideId > (int)slideTime.size() - 1) {
 				slideId = (int)slideTime.size() - 1;
 				play.state = ButtonImage::pressed;
 			}
-			slideStart = cur;
 		}
 	}
 

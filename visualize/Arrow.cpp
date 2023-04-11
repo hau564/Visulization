@@ -11,6 +11,8 @@ void Arrow::init() {
 
 void Arrow::create(sf::Vector2f pos1, sf::Vector2f pos2, int k) {
 	init();
+
+	startPos = pos1, endPos = pos2;
 	
 	float dx = pos2.x - pos1.x;
 	float dy = pos2.y - pos1.y;
