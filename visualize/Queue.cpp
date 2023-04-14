@@ -1,4 +1,4 @@
-#include "LinkedList.h"
+#include "Queue.h"
 #include "Layout.h"
 #include "Display.h"
 #include "Format.h"
@@ -145,6 +145,7 @@ namespace queue {
 
 		layer.addTextAbove("temp", layer.list[0], { 0, 50 });
 		layer.list[0].beTarget();
+		if (layer.list.size() > 1) layer.list[1].beVisited();
 		display::addLayer(layer);
 		ord.push_back(2);
 

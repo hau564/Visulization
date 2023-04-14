@@ -12,7 +12,10 @@ void initVariables() {
     staticArray::init();
     dynamicArray::init();
     linkedList::init();
+    doublyLinkedList::init();
+    circularLinkedList::init();
     queue::init();
+    stack::init();
 
     for (int i = 0; i < layout::structuresBar::labels.size(); ++i)
         structId[layout::structuresBar::labels[i]] = i + 1;
@@ -31,8 +34,17 @@ void run(sf::RenderWindow& window, sf::Event event, std::string s) {
     case 3:
         linkedList::run(window, event);
         break;
+    case 4:
+        doublyLinkedList::run(window, event);
+        break;
+    case 5:
+        circularLinkedList::run(window, event);
+        break;
     case 6:
         queue::run(window, event);
+        break;
+    case 7:
+        stack::run(window, event);
         break;
     default:
         break;
@@ -54,8 +66,17 @@ void draw(sf::RenderWindow& window, std::string s) {
     case 3:
         linkedList::draw(window);
         break;
+    case 4:
+        doublyLinkedList::draw(window);
+        break;
+    case 5:
+        circularLinkedList::draw(window);
+        break;
     case 6:
         queue::draw(window);
+        break;
+    case 7:
+        stack::draw(window);
         break;
     default:
         break;
@@ -90,7 +111,7 @@ int main()
         layout::structuresBar::bar.draw(window);
         draw(window, cStruct);
 
-        //std::cout << control::getSlideId() << " " << 1.0 * clock() / CLOCKS_PER_SEC << "\n";
+        //std::cout << control::slideId << " " << control::slideStart << " " << control::cur << "\n";
                 
         window.display();
     }

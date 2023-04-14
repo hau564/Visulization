@@ -30,7 +30,7 @@ namespace control {
 	}
 
 	double getSpeed() {
-		return (speed.get() / (0.1)) + 1.0000001;
+		return (int)((speed.get() / (0.1)) + 1.0000001);
 	}
 
 	void runObjects(sf::RenderWindow& window, sf::Event event) {
@@ -81,7 +81,7 @@ namespace control {
 		}
 		cur = 1.0 * clock() / CLOCKS_PER_SEC;
 
-		if (cur - slideStart >= slideTime[slideId] / getSpeed()) {
+		while (cur - slideStart >= slideTime[slideId] / getSpeed()) {
 			slideStart += slideTime[slideId] / getSpeed();
 			++slideId;
 			if (slideId > (int)slideTime.size() - 1) {
@@ -118,7 +118,7 @@ namespace control {
 			slideStart = 1.0 * clock() / CLOCKS_PER_SEC - (cur - slideStart);
 		}
 		cur = 1.0 * clock() / CLOCKS_PER_SEC;
-		if (cur - slideStart >= slideTime[slideId] / getSpeed()) {
+		while (cur - slideStart >= slideTime[slideId] / getSpeed()) {
 			slideStart += slideTime[slideId] / getSpeed();
 			++slideId;
 			if (slideId > (int)slideTime.size() - 1) {

@@ -28,4 +28,7 @@
 #include "StaticArray.h"
 #include "DynamicArray.h"
 #include "LinkedList.h"
+#include "DLinkedList.h"
+#include "CLinkedList.h"
 #include "Queue.h"
+#include "Stack.h"

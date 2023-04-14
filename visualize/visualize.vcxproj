@@ -144,9 +144,12 @@
     <ClCompile Include="Arrow.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="ButtonImage.cpp" />
+    <ClCompile Include="CLinkedList.cpp" />
+    <ClCompile Include="CLinkedList.h" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="Control.cpp" />
     <ClCompile Include="Display.cpp" />
+    <ClCompile Include="DLinkedList.cpp" />
     <ClCompile Include="DropdownBox.cpp" />
     <ClCompile Include="DynamicArray.cpp" />
     <ClCompile Include="Format.cpp" />
@@ -161,6 +164,7 @@
     <ClCompile Include="Queue.cpp" />
     <ClCompile Include="Slider.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="Stack.cpp" />
     <ClCompile Include="StaticArray.cpp" />
     <ClCompile Include="Style.cpp" />
     <ClCompile Include="Taskbar.cpp" />
@@ -173,6 +177,7 @@
     <ClInclude Include="ButtonImage.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="Control.h" />
+    <ClInclude Include="DLinkedList.h" />
     <ClInclude Include="DropdownBox.h" />
     <ClInclude Include="DynamicArray.h" />
     <ClInclude Include="Format.h" />
@@ -187,6 +192,7 @@
     <ClInclude Include="Layout.h" />
     <ClInclude Include="MousePos.h" />
     <ClInclude Include="Slider.h" />
+    <ClInclude Include="Stack.h" />
     <ClInclude Include="StaticArray.h" />
     <ClInclude Include="Style.h" />
     <ClInclude Include="MenuBar.h" />

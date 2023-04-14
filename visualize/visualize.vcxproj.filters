@@ -123,6 +123,18 @@
     <ClCompile Include="Queue.cpp">
       <Filter>Source Files\StructsFunction</Filter>
     </ClCompile>
+    <ClCompile Include="Stack.cpp">
+      <Filter>Source Files\StructsFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="DLinkedList.cpp">
+      <Filter>Source Files\StructsFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="CLinkedList.h">
+      <Filter>Header Files\Structs</Filter>
+    </ClCompile>
+    <ClCompile Include="CLinkedList.cpp">
+      <Filter>Source Files\StructsFunction</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Button.h">
@@ -201,6 +213,12 @@
       <Filter>Header Files\InternalTools</Filter>
     </ClInclude>
     <ClInclude Include="Queue.h">
+      <Filter>Header Files\Structs</Filter>
+    </ClInclude>
+    <ClInclude Include="Stack.h">
+      <Filter>Header Files\Structs</Filter>
+    </ClInclude>
+    <ClInclude Include="DLinkedList.h">
       <Filter>Header Files\Structs</Filter>
     </ClInclude>
   </ItemGroup>

@@ -2,6 +2,8 @@
 #include "Layout.h"
 #include "Format.h"
 
+#define PI 3.14159265359
+
 void Layer::addArray(std::vector<int> a, sf::Vector2f pos)
 {
 	int n = a.size();
@@ -21,16 +23,71 @@ void Layer::addLinkedList(std::vector<int> llist, sf::Vector2f pos)
 
 	int n = llist.size();
 	int arrowLength = layout::display::arrayBlockSize.x;
-	
+
 	int length = (n - 1) * (arrowLength + layout::display::arrayBlockSize.x) + layout::display::arrayBlockSize.x;
 	if (!pos.x) pos.x = layout::displayWindow::pos.x + layout::displayWindow::size.x / 2 - length / 2;
 	if (!pos.y) pos.y = layout::displayWindow::pos.y + layout::displayWindow::size.y / 2 - layout::display::arrayBlockSize.y / 2 - up;
-	
+
 	for (int i = 0; i < n; ++i) {
 		list.push_back(LinkedListNode(pos + sf::Vector2f(i * (arrowLength + layout::display::arrayBlockSize.x), 0), llist[i]));
 	}
 	for (int i = 0; i < n - 1; ++i) {
 		arrow.push_back(Arrow(list[i], list[i + 1]));
+	}
+}
+
+void Layer::addDLinkedList(std::vector<int> llist, sf::Vector2f pos)
+{
+	if (llist.empty()) return;
+
+	int n = llist.size();
+	int arrowLength = layout::display::arrayBlockSize.x;
+
+	int length = (n - 1) * (arrowLength + layout::display::arrayBlockSize.x) + layout::display::arrayBlockSize.x;
+	if (!pos.x) pos.x = layout::displayWindow::pos.x + layout::displayWindow::size.x / 2 - length / 2;
+	if (!pos.y) pos.y = layout::displayWindow::pos.y + layout::displayWindow::size.y / 2 - layout::display::arrayBlockSize.y / 2 - up;
+
+	for (int i = 0; i < n; ++i) {
+		list.push_back(LinkedListNode(pos + sf::Vector2f(i * (arrowLength + layout::display::arrayBlockSize.x), 0), llist[i]));
+	}
+	for (int i = 0; i < n - 1; ++i) {
+		arrow.push_back(Arrow(list[i], list[i + 1]));
+	}
+	for (int i = 0; i < n - 1; ++i) {
+		arrow.push_back(Arrow(list[i + 1], list[i]));
+	}
+}
+
+sf::Vector2f getCircularPos(int i, int n) {
+	sf::Vector2f pos;
+	pos.x = layout::displayWindow::pos.x + layout::displayWindow::size.x / 2;
+	pos.y = layout::displayWindow::pos.y + layout::displayWindow::size.y / 2 - 100;
+	if (n == 1) {
+		return pos - sf::Vector2f(layout::display::arrayBlockSize.x / 2, layout::display::arrayBlockSize.y / 2);
+	}
+
+	double angle = PI / 2 - 2 * PI / n * i;
+	std::cout << angle / PI<< "\n";
+	double t = 250;
+	return pos + sf::Vector2f(t * cos(angle), -t * sin(angle));
+}
+
+void Layer::addCLinkedList(std::vector<int> llist, sf::Vector2f pos)
+{
+	if (llist.empty()) return;
+
+	int n = llist.size();
+	int arrowLength = layout::display::arrayBlockSize.x;
+
+	int length = (n - 1) * (arrowLength + layout::display::arrayBlockSize.x) + layout::display::arrayBlockSize.x;
+	if (!pos.x) pos.x = layout::displayWindow::pos.x + layout::displayWindow::size.x / 2 - length / 2;
+	if (!pos.y) pos.y = layout::displayWindow::pos.y + layout::displayWindow::size.y / 2 - layout::display::arrayBlockSize.y / 2 - up;
+
+	for (int i = 0; i < n; ++i) {
+		list.push_back(LinkedListNode(getCircularPos(i, n), llist[i]));
+	}
+	for (int i = 0; i < n; ++i) {
+		arrow.push_back(Arrow(list[i], list[(i + 1) % n]));
 	}
 }
 

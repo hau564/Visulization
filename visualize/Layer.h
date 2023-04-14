@@ -15,6 +15,8 @@ public:
 
 	void addArray(std::vector<int> a, sf::Vector2f pos = { 0, 0 });
 	void addLinkedList(std::vector<int> llist, sf::Vector2f pos = { 0, 0 });
+	void addDLinkedList(std::vector<int> llist, sf::Vector2f pos = { 0, 0 });
+	void addCLinkedList(std::vector<int> llist, sf::Vector2f pos = { 0, 0 });
 	void addArrow(sf::Vector2f pos1, sf::Vector2f pos2);
 	void addTextAbove(std::string s, LinkedListNode node, sf::Vector2f displace);
 	

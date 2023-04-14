@@ -67,10 +67,10 @@ namespace linkedList {
 		ord.push_back(0);
 
 		sf::Vector2f pos;
-		if (list.size()) 
-			pos = layer.list[0].getPosition() + sf::Vector2f(- 2 * layout::display::arrayBlockSize.x, 0);
-		else 
-			pos = layout::displayWindow::pos + sf::Vector2f(layout::displayWindow::size.x / 2, layout::displayWindow::size.y / 2 - 50);
+		if (list.size())
+			pos = layer.list[0].getPosition() + sf::Vector2f(-2 * layout::display::arrayBlockSize.x, 0);
+		else
+			pos = layout::displayWindow::pos + sf::Vector2f(layout::displayWindow::size.x / 2 - layout::display::arrayBlockSize.x / 2, layout::displayWindow::size.y / 2 - layout::display::arrayBlockSize.y / 2 -100);
 		layer.list.push_back(LinkedListNode(pos, val));
 		layer.addTextAbove("temp", layer.list.back(), { 0, 50 });
 		
@@ -231,24 +231,24 @@ namespace linkedList {
 		layer1.addTextAbove("tail", layer1.list.back(), { 30, -30 });
 
 		Layer layerTrans = layer1;
-		int slideCnt = 20;
+		int slideCnt = 40;
 		layer.text.pop_back();
 		layer.list[cur].beNormal();
 		for (int r = 0; r < slideCnt; ++r) {
 			double rate = 1.0 * r / slideCnt;
 			for (int i = 0; i <= cur; ++i) {
 				layerTrans.list[i] = animation::getObj(layer.list[i], layer1.list[i], rate);
-				layerTrans.arrow[i] = animation::getArrow(layer.arrow[i], layer1.arrow[i], rate);
 			}
 			layerTrans.list[cur + 1] = animation::getObj(layer.list.back(), layer1.list[cur + 1], rate);
-			layerTrans.arrow[cur + 1] = animation::getArrow(layer.arrow.back(), layer1.arrow[cur + 1], rate);
 			layerTrans.text[0] = animation::getObj(layer.text[0], layer1.text[0], rate);
 			layerTrans.text[1] = animation::getObj(layer.text[1], layer1.text[1], rate);
 
 			for (int i = cur + 2; i < (int)list.size();++i) {
 				layerTrans.list[i] = animation::getObj(layer.list[i - 1], layer1.list[i], rate);
-				if (i < (int)list.size() - 1)
-					layerTrans.arrow[i] = animation::getArrow(layer.arrow[i - 1], layer1.arrow[i], rate);
+			}
+
+			for (int i = 0; i < (int)list.size() - 1; ++i) {
+				layerTrans.arrow[i].create(layerTrans.list[i], layerTrans.list[i + 1]);
 			}
 
 			display::addLayer(layerTrans, 1.0 / slideCnt, (r == 0));
