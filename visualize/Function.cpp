@@ -12,7 +12,16 @@ void Function::create(sf::Vector2f pos, sf::Vector2f size, std::string label, st
 		textboxes[i].create(textPos + sf::Vector2f(0, i * size.y), size + sf::Vector2f(-10, 0), inputLabels[i]);
 	}
 
-	go.create(textPos + sf::Vector2f(0, (int)inputLabels.size() * size.y), size + sf::Vector2f(-10, 0), style::button::faces, "Go");
+	if (inputLabels.empty()) {
+		go.create(textPos + sf::Vector2f(0, (int)inputLabels.size() * size.y), size + sf::Vector2f(-10, 0), style::button::faces, "Go");
+	}
+	else {
+		sf::Vector2f pos = textPos + sf::Vector2f(0, (int)inputLabels.size() * size.y);
+		sf::Vector2f siz = size + sf::Vector2f(-10, -10);
+		int d = 10, fontSize = 25;
+		file.create(pos, { (siz.x - d) / 2, siz.y }, style::button::faces, "File", 0, fontSize);
+		go.create(pos + sf::Vector2f((siz.x - d) / 2 + d, 0), {(siz.x - d) / 2, siz.y}, style::button::faces, "Go", 0, fontSize);
+	}
 }
 
 bool Function::run(sf::RenderWindow& window, sf::Event event, std::vector<std::string>& get)
@@ -45,14 +54,19 @@ bool Function::run(sf::RenderWindow& window, sf::Event event, std::vector<std::s
 			}
 		}
 		sf::Vector2f mousePos = getMousePos(window);
-		if (active && event.type == sf::Event::MouseButtonPressed) {
-			int stillActive = textboxActive;
-			for (Textbox& tbox : textboxes)
-				stillActive |= tbox.box.contains(mousePos);
-			active = stillActive;
-			if (!active) functionButton.run(window, event);
+		if (!textboxes.empty() && file.run(window, event) == Button::pressed) {
+
 		}
-		else active = 1;
+		else {
+			if (active && event.type == sf::Event::MouseButtonPressed) {
+				int stillActive = textboxActive;
+				for (Textbox& tbox : textboxes)
+					stillActive |= tbox.box.contains(mousePos);
+				active = stillActive;
+				if (!active) functionButton.run(window, event);
+			}
+			else active = 1;
+		}
 	}
 	return false;
 }
@@ -62,6 +76,7 @@ void Function::draw(sf::RenderWindow& window)
 	functionButton.draw(window);
 	if (active) {
 		go.draw(window);
+		if (textboxes.size()) file.draw(window);
 		for (int i = (int)textboxes.size() - 1; i >= 0; --i)
 			textboxes[i].draw(window);
 	}

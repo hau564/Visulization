@@ -67,7 +67,6 @@ sf::Vector2f getCircularPos(int i, int n) {
 	}
 
 	double angle = PI / 2 - 2 * PI / n * i;
-	std::cout << angle / PI<< "\n";
 	double t = 250;
 	return pos + sf::Vector2f(t * cos(angle), -t * sin(angle));
 }

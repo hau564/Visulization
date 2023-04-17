@@ -1,66 +1,13 @@
-﻿  Layer.cpp
-C:\Users\MAC_LENOVO\source\repos\visualize\visualize\Layer.cpp(9,18): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\MAC_LENOVO\source\repos\visualize\visualize\Layer.cpp(11,13): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
-C:\Users\MAC_LENOVO\source\repos\visualize\visualize\Layer.cpp(24,22): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\MAC_LENOVO\source\repos\visualize\visualize\Layer.cpp(25,18): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
-C:\Users\MAC_LENOVO\source\repos\visualize\visualize\Layer.cpp(27,13): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
-C:\Users\MAC_LENOVO\source\repos\visualize\visualize\Layer.cpp(43,22): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\MAC_LENOVO\source\repos\visualize\visualize\Layer.cpp(44,18): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
-C:\Users\MAC_LENOVO\source\repos\visualize\visualize\Layer.cpp(46,13): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
-C:\Users\MAC_LENOVO\source\repos\visualize\visualize\Layer.cpp(72,47): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-C:\Users\MAC_LENOVO\source\repos\visualize\visualize\Layer.cpp(72,30): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-C:\Users\MAC_LENOVO\source\repos\visualize\visualize\Layer.cpp(79,22): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\MAC_LENOVO\source\repos\visualize\visualize\Layer.cpp(80,18): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
-C:\Users\MAC_LENOVO\source\repos\visualize\visualize\Layer.cpp(82,13): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
-C:\Users\MAC_LENOVO\source\repos\visualize\visualize\Arrow.h(29,10): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\MAC_LENOVO\source\repos\visualize\visualize\Layer.cpp(35): message : see reference to function template instantiation 'Arrow::Arrow<_Ty,_Ty>(Obj1,Obj2)' being compiled
-          with
-          [
-              _Ty=LinkedListNode,
-              Obj1=LinkedListNode,
-              Obj2=LinkedListNode
-          ]
-C:\Users\MAC_LENOVO\source\repos\visualize\visualize\Arrow.h(33,21): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+﻿  Control.cpp
+C:\Users\MAC_LENOVO\source\repos\visualize\visualize\Control.cpp(44,18): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\MAC_LENOVO\source\repos\visualize\visualize\Control.cpp(46,54): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\MAC_LENOVO\source\repos\visualize\visualize\Control.cpp(98,22): warning C4244: 'initializing': conversion from '__int64' to 'int', possible loss of data
+C:\Users\MAC_LENOVO\source\repos\visualize\visualize\Control.cpp(105,22): warning C4244: 'initializing': conversion from '__int64' to 'int', possible loss of data
+C:\Users\MAC_LENOVO\source\repos\visualize\visualize\Control.cpp(135,95): warning C4244: 'return': conversion from '__int64' to 'int', possible loss of data
 x64\Release\CLinkedList.obj : warning LNK4042: object specified more than once; extras ignored
   Generating code
-  2 of 1345 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
+  0 of 1344 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    6 functions had inline decision re-evaluated but remain unchanged
+    0 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   visualize.vcxproj -> C:\Users\MAC_LENOVO\source\repos\visualize\x64\Release\visualize.exe

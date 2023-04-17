@@ -79,10 +79,11 @@ namespace layout {
 
 
 	namespace arrow {
-		std::string txt[3] = { "arrow/arrow.png",
+		std::string txt[4] = { "Arrow/arrow.png",
 						       "Arrow/greenarrow.png",
-						       "Arrow/redarrow.png", };
-		sf::Texture t[3];
+						       "Arrow/redarrow.png",
+						       "Arrow/selfarrow.png", };
+		sf::Texture t[4];
 	}
 
 	void setRectangle(sf::RectangleShape& rect, sf::Vector2f pos, sf::Vector2f size, sf::Color backColor, int outThick, sf::Color outColor) {
@@ -108,7 +109,7 @@ namespace layout {
 
 		structuresBar::bar.create(layout::structuresBar::pos, layout::structuresBar::blockSize, style::button::faces, layout::structuresBar::labels, layout::structuresBar::direction, layout::structuresBar::charSize);
 		
-		for (int i = 0; i < 3; ++i)
+		for (int i = 0; i < 4; ++i)
 			arrow::t[i].loadFromFile(arrow::txt[i]);
 	}
 }

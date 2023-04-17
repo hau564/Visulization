@@ -9,7 +9,7 @@ class Function {
 public:
 	Function() {};
 
-	Button functionButton, go;
+	Button functionButton, go, file;
 	std::vector<Textbox> textboxes;
 	int active = 0;
 

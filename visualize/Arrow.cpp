@@ -4,15 +4,24 @@
 #define PI 3.14159265359
 
 void Arrow::init() {
-	for (int i = 0; i < 3; ++i) {
+	for (int i = 0; i < 4; ++i) {
 		s[i].setTexture(layout::arrow::t[i]);
 	}
+	float r = 2.0 * layout::display::arrayBlockSize.x / layout::arrow::t[3].getSize().x;
+	s[3].setScale(r, r);
 }
 
 void Arrow::create(sf::Vector2f pos1, sf::Vector2f pos2, int k) {
 	init();
 
 	startPos = pos1, endPos = pos2;
+
+	if (abs(pos1.x - pos2.x) < 0.01 && abs(pos1.y - pos2.y) < 0.01) {
+		id = 3;
+		s[id].setPosition(pos1);
+		return;
+	}
+	else id = 0;
 	
 	float dx = pos2.x - pos1.x;
 	float dy = pos2.y - pos1.y;

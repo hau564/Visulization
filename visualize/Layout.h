@@ -61,8 +61,8 @@ namespace layout {
 	}
 
 	namespace arrow {
-		extern std::string txt[3];
-		extern sf::Texture t[3];
+		extern std::string txt[4];
+		extern sf::Texture t[4];
 	}
 
 	namespace display {
