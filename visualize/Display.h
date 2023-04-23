@@ -6,6 +6,7 @@
 
 namespace display {
 	extern std::vector<Layer> layers;
+	extern sf::Text display;
 	
 	extern void deleteDisplay();
 	extern void start();

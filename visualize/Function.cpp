@@ -1,6 +1,7 @@
 #include "Function.h"
 #include "Style.h"
 #include "MousePos.h"
+#include "LoadFile.h"
 
 void Function::create(sf::Vector2f pos, sf::Vector2f size, std::string label, std::vector<std::string> inputLabels)
 {
@@ -55,7 +56,18 @@ bool Function::run(sf::RenderWindow& window, sf::Event event, std::vector<std::s
 		}
 		sf::Vector2f mousePos = getMousePos(window);
 		if (!textboxes.empty() && file.run(window, event) == Button::pressed) {
-
+			if (textboxActive) {
+				if (file.isPressed()) file.state = Button::focused;
+			}
+			else {
+				std::vector<std::string> strs;
+				loadFile::get(strs);
+				for (int i = 0; i < (int)textboxes.size(); ++i) {
+					if (i >= strs.size()) break;
+					textboxes[i].inputString = strs[i];
+					textboxes[i].applyText();
+				}
+			}
 		}
 		else {
 			if (active && event.type == sf::Event::MouseButtonPressed) {

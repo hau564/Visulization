@@ -26,7 +26,7 @@ namespace control {
 		speedText.setOrigin(0, rect.height / 2 + 10);
 		speedText.setPosition(layout::controlWindow::speedPos + sf::Vector2f(layout::controlWindow::speedSize.x + 7, layout::controlWindow::speedSize.y / 2));
 		
-		speedText.setFillColor(sf::Color::Black);
+		speedText.setFillColor(style::textColor);
 	}
 
 	double getSpeed() {
@@ -103,9 +103,14 @@ namespace control {
 		if (next.justPressed()) {
 			if (slideId < checkpoint.back()) {
 				int checkpointId = std::upper_bound(checkpoint.begin(), checkpoint.end(), slideId) - checkpoint.begin();
+				if (slideId == checkpoint[checkpointId]) {
+					slideStart = cur - slideTime[slideId] / getSpeed();
+					play.state = ButtonImage::pressed;
+				}
+				else 
+					slideStart = cur;
 				slideId = checkpoint[checkpointId];
 			}
-			slideStart = cur;
 		}
 		if (toEnd.justPressed()) {
 			slideId = (int)slideTime.size() - 1;

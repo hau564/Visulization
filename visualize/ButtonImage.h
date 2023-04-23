@@ -6,6 +6,7 @@ class ButtonImage {
 public:
 	sf::Texture texts[4];
 	sf::Sprite faces[4];
+	sf::RectangleShape bound;
 	sf::Vector2f pos, size;
 
 	enum StateId {normal = 0, focused = 1, pressed = 2, disable = 3};

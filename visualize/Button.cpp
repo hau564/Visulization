@@ -2,7 +2,7 @@
 
 #include "Button.h"
 #include "MousePos.h"
-
+#include "Style.h"
 
 sf::RectangleShape ButtonFace::create(sf::Vector2f pos, sf::Vector2f size) {
 	sf::RectangleShape rect;
@@ -20,6 +20,8 @@ sf::RectangleShape ButtonFace::create(sf::Vector2f pos, sf::Vector2f size) {
 
 
 void Button::create(sf::Vector2f _pos, sf::Vector2f _size, Button4Faces state, const std::string label, int _mode, int charSize) {
+	//std::cout << label << " button inited with color " << state.normal.backgroundColor.r << " " << state.normal.backgroundColor.g << " " << state.normal.backgroundColor.b << "\n";
+	
 	pos = _pos, size = _size;
 	Button::faces[0] = state.normal.create(pos, size);
 	Button::faces[1] = state.focused.create(pos, size);
@@ -39,7 +41,7 @@ void Button::create(sf::Vector2f _pos, sf::Vector2f _size, Button4Faces state, c
 	Button::text.setOrigin(textRect.left + textRect.width / 2.0f,
 		textRect.top + textRect.height / 2.0f);
 	Button::text.setPosition(sf::Vector2f(pos.x + size.x / 2.0f, pos.y + size.y / 2.0f));
-	Button::text.setFillColor(sf::Color::Black);
+	Button::text.setFillColor(style::textColor);
 
 
 	//std::cout << "Button created successfull at " << pos.x << " " << pos.y << ": " << label << std::endl;

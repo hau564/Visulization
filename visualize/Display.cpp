@@ -54,6 +54,10 @@ namespace display {
 			//layout::sourceWindow::shape.setSize(sf::Vector2f(layout::sourceWindow::size.x, layout::sourceWindow::blockSize.y * source::lineCount));
 			window.draw(layout::sourceWindow::shape);
 		}
+		//window.draw(layout::displayWindow::text);
+		//window.draw(layout::functionWindow::text);
+		//window.draw(layout::controlWindow::text);
+
 		window.draw(layout::controlWindow::shape);
 		window.draw(layout::displayWindow::shape);
 		window.draw(layout::functionWindow::shape);

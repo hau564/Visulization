@@ -1,13 +1,29 @@
-﻿  Control.cpp
-C:\Users\MAC_LENOVO\source\repos\visualize\visualize\Control.cpp(44,18): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\MAC_LENOVO\source\repos\visualize\visualize\Control.cpp(46,54): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\MAC_LENOVO\source\repos\visualize\visualize\Control.cpp(98,22): warning C4244: 'initializing': conversion from '__int64' to 'int', possible loss of data
-C:\Users\MAC_LENOVO\source\repos\visualize\visualize\Control.cpp(105,22): warning C4244: 'initializing': conversion from '__int64' to 'int', possible loss of data
-C:\Users\MAC_LENOVO\source\repos\visualize\visualize\Control.cpp(135,95): warning C4244: 'return': conversion from '__int64' to 'int', possible loss of data
+﻿  Layout.cpp
+C:\Users\MAC_LENOVO\source\repos\visualize\visualize\Layout.cpp(10,21): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\MAC_LENOVO\source\repos\visualize\visualize\Layout.cpp(25,39): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\MAC_LENOVO\source\repos\visualize\visualize\Layout.cpp(39,43): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\MAC_LENOVO\source\repos\visualize\visualize\Layout.cpp(66,32): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\MAC_LENOVO\source\repos\visualize\visualize\Layout.cpp(97,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 x64\Release\CLinkedList.obj : warning LNK4042: object specified more than once; extras ignored
   Generating code
-  0 of 1344 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+  244 of 1583 functions (15.4%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+    6 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   visualize.vcxproj -> C:\Users\MAC_LENOVO\source\repos\visualize\x64\Release\visualize.exe

@@ -1,5 +1,6 @@
 #include "ButtonImage.h"
 #include "MousePos.h"
+#include "Style.h"
 
 void ButtonImage::create(sf::Vector2f _pos, sf::Vector2f _size, const std::vector<std::string> addresses, int _mode)
 {
@@ -13,6 +14,16 @@ void ButtonImage::create(sf::Vector2f _pos, sf::Vector2f _size, const std::vecto
 
 		sf::Vector2f tSize = (sf::Vector2f)texts[i].getSize();
 		faces[i].setScale(sf::Vector2f(size.x / tSize.x, size.y / tSize.y));
+		
+	}
+	sf::Color col = style::backgroundColor;
+	if (col.r + col.g + col.b <= 100) {
+		col.r = std::min(255, col.r + 50);
+		col.g = std::min(255, col.g + 50);
+		col.b = std::min(255, col.b + 50);
+		bound.setPosition(pos);
+		bound.setSize(size);
+		bound.setFillColor(col);
 	}
 
 	state = normal;
@@ -60,6 +71,7 @@ int ButtonImage::run(sf::RenderWindow& window, sf::Event event) {
 }
 
 void ButtonImage::draw(sf::RenderWindow& window) {
+	window.draw(bound);
 	window.draw(faces[state]);
 }
 

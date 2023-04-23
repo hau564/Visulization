@@ -6,6 +6,8 @@
 
 #include "Style.h"
 #include "Layout.h"
+#include "Setting.h"
+
 #include "Button.h"
 #include "DropdownBox.h"
 #include "MenuBar.h"
@@ -13,12 +15,14 @@
 #include "Textbox.h"
 #include "ButtonImage.h"
 #include "Slider.h"
+#include "ColorPicker.h"
 
 #include "Format.h"
 #include "Display.h"
 #include "Control.h"
 #include "Source.h"
 #include "Animation.h"
+#include "LoadFile.h"
 
 #include "ArrayNode.h"
 #include "LinkedListNode.h"

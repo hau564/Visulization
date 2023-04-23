@@ -19,7 +19,7 @@ namespace source {
 			rects[i].setSize(layout::sourceWindow::blockSize);
 			rects[i].setOutlineThickness(0);
 			
-			rects[i].setFillColor(sf::Color::White);
+			rects[i].setFillColor(sf::Color::Transparent);
 
 			font.loadFromFile("font/cour.ttf");
 			texts[i].setFont(font);
@@ -29,14 +29,14 @@ namespace source {
 			sf::FloatRect textRect = texts[i].getLocalBounds();
 			//texts[i].setOrigin(sf::Vector2f(0, textRect.height / 2));
 			texts[i].setPosition(pos.x + 10, pos.y - 2);// +layout::sourceWindow::blockSize.y / 2.0);
-			texts[i].setFillColor(sf::Color::Black);
+			texts[i].setFillColor(style::textColor);
 			texts[i].setString("");
 		}
 	}	
 	void clear() {
 		for (int i = 0; i < cnt; ++i) {
 			texts[i].setString("");
-			rects[i].setFillColor(sf::Color::White);
+			rects[i].setFillColor(sf::Color::Transparent);
 		}
 		lineCount = 0;
 	}
@@ -50,10 +50,10 @@ namespace source {
 
 	void hightlight(int pos) {
 		if (rects.empty()) return;
-		rects[hightlightPos].setFillColor(sf::Color::White);
+		rects[hightlightPos].setFillColor(style::backgroundColor);
 		if (pos < 0 || pos >= lineCount) return;
 		hightlightPos = pos;
-		rects[hightlightPos].setFillColor(sf::Color::Cyan);
+		rects[hightlightPos].setFillColor(style::codeHighlight);
 	}
 	void draw(sf::RenderWindow& window) {
 		for (sf::RectangleShape& rect : rects)

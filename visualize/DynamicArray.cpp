@@ -71,6 +71,7 @@ namespace dynamicArray {
 	}
 
 	void Grow() {
+		if (arr.empty()) return;
 		display::deleteDisplay();
 
 		display::addSource({"int *newA = New int[2 * N]",

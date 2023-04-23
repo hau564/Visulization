@@ -6,6 +6,8 @@ std::map<std::string, int> structId;
 void initVariables() {
     srand(time(NULL));
     layout::init();
+
+    loadFile::init();
     control::init();
     source::init();
 
@@ -90,6 +92,10 @@ int main()
     settings.antialiasingLevel = 5.0;
     sf::RenderWindow window(sf::VideoMode(style::Width, style::Height), "Visualize", sf::Style::Default,settings);
     window.setFramerateLimit(60);
+
+    colorPicker::init();
+    setting::init();
+    style::refresh();
     initVariables();
 
     std::string cStruct = "";
@@ -103,6 +109,9 @@ int main()
             cStruct = layout::structuresBar::bar.run(window, event);
             
             run(window, event, cStruct);
+            if (setting::run(window, event)) {
+                initVariables();
+            }
         }
 
         window.clear(style::backgroundColor);
@@ -110,7 +119,7 @@ int main()
         
         layout::structuresBar::bar.draw(window);
         draw(window, cStruct);
-
+        setting::draw(window);
         //std::cout << control::slideId << " " << control::slideStart << " " << control::cur << "\n";
                 
         window.display();

@@ -188,6 +188,7 @@ namespace circularLinkedList {
 
 		if (_pos == "head") insertHead(val);
 		if (!format::toInt(_pos, pos)) return;
+		if (_pos == "") pos = rand() % ((int)list.size() + 1);
 		if (pos == 0) return insertHead(val);
 
 		display::deleteDisplay();
@@ -413,6 +414,7 @@ namespace circularLinkedList {
 		if (_pos == "head") DeleteHead();
 		if (!format::toInt(_pos, pos)) return;
 
+		if (_pos == "") pos = rand() % (int)list.size();
 		if (pos == 0) return DeleteHead();
 
 		if (list.size() == 1) {
@@ -594,7 +596,7 @@ namespace circularLinkedList {
 		for (int i = 2; i <= 4; i += 2) {
 			display::addLayer(layer);
 			ord.push_back(i);
-			if (list[cur] != x) layer.list[cur].setColor(sf::Color::Red);
+			if (list[cur] != x) layer.list[cur].setColor(style::denied);
 		}
 
 		if (cur < list.size()) {

@@ -96,7 +96,7 @@ void Layer::addTextAbove(std::string s, LinkedListNode node, sf::Vector2f displa
 	text.back().setCharacterSize(25);
 	text.back().setString(s);
 	text.back().setPosition(node.getPosition() + displace);
-	text.back().setFillColor(sf::Color::Black);
+	text.back().setFillColor(style::textColor);
 }
 
 void Layer::addArrow(sf::Vector2f pos1, sf::Vector2f pos2)

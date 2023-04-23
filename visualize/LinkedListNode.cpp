@@ -15,7 +15,7 @@ void LinkedListNode::create(sf::Vector2f pos, int x)
 	sf::FloatRect textRect = text.getLocalBounds();
 	text.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
 	text.setPosition(sf::Vector2f(pos.x + size.x / 2.0f, pos.y + size.y / 2.0f));
-	text.setFillColor(sf::Color::Black);
+	text.setFillColor(style::textColor);
 }
 
 LinkedListNode::LinkedListNode(sf::Vector2f pos, int x)
@@ -35,15 +35,15 @@ void LinkedListNode::draw(sf::RenderWindow& window)
 }
 
 void LinkedListNode::beNormal() {
-	bound.setFillColor(layout::display::normalColor);
+	bound.setFillColor(style::backgroundColor);
 }
 
 void LinkedListNode::beTarget() {
-	bound.setFillColor(layout::display::targetColor);
+	bound.setFillColor(style::target);
 }
 
 void LinkedListNode::beVisited() {
-	bound.setFillColor(layout::display::visitedColor);
+	bound.setFillColor(style::pointTarget);
 }
 
 void LinkedListNode::setPosition(sf::Vector2f pos)

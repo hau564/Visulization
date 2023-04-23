@@ -8,7 +8,12 @@ namespace style {
 	extern int Height;
 
 	extern sf::Color backgroundColor;
-
+	extern sf::Color outlineColor;
+	extern sf::Color textColor;
+	extern sf::Color codeHighlight;
+	extern sf::Color target;
+	extern sf::Color pointTarget;
+	extern sf::Color denied;
 
 	namespace button {
 		extern ButtonFace normal;
@@ -16,6 +21,14 @@ namespace style {
 		extern ButtonFace pressed;
 		extern ButtonFace disabled;
 		extern Button4Faces faces;
+
+		namespace defaultButton{
+			extern ButtonFace normal;
+			extern ButtonFace focused;
+			extern ButtonFace pressed;
+			extern ButtonFace disabled;
+			extern Button4Faces faces;
+		}
 
 		namespace textButton {
 			extern ButtonFace normal;
@@ -26,14 +39,5 @@ namespace style {
 		}
 	}
 
-
-	namespace menuBar {
-		namespace blockStyle {
-			extern ButtonFace normal;
-			extern ButtonFace focused;
-			extern ButtonFace pressed;
-			extern ButtonFace disabled;
-			extern Button4Faces faces;
-		}
-	}
+	extern void refresh();
 };

@@ -13,7 +13,7 @@ void Textbox::create(sf::Vector2f _pos, sf::Vector2f _size, std::string textStr,
 	sf::FloatRect textRect = guideText.getLocalBounds();
     guideText.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
     guideText.setPosition(sf::Vector2f(pos.x + textRect.width / 2.0f, pos.y + size.y / 2.0f));
-    guideText.setFillColor(sf::Color::Black);
+    guideText.setFillColor(style::textColor);
 
 
     text.setFont(font);
@@ -23,7 +23,7 @@ void Textbox::create(sf::Vector2f _pos, sf::Vector2f _size, std::string textStr,
     sf::FloatRect iTextRect = text.getLocalBounds();
     text.setOrigin(iTextRect.left + iTextRect.width / 2.0f, iTextRect.top + iTextRect.height / 2.0f);
     text.setPosition(sf::Vector2f(pos.x + textRect.width + iTextRect.width / 2.0f, pos.y + size.y / 2.0f));
-    text.setFillColor(sf::Color::Black);
+    text.setFillColor(style::textColor);
     text.setString("");
 
 
@@ -165,6 +165,17 @@ void Textbox::run(sf::RenderWindow& window, sf::Event event) {
                     applyText();
                 }
             }
+        }
+
+        static int ctrlHolding = 0;
+        if ((sf::Keyboard::isKeyPressed(sf::Keyboard::LControl) || sf::Keyboard::isKeyPressed(sf::Keyboard::RControl))
+             && !sf::Keyboard::isKeyPressed(sf::Keyboard::V))
+            ctrlHolding = 1;
+        if (event.type == sf::Event::KeyReleased) ctrlHolding = 0;
+
+        if (ctrlHolding && sf::Keyboard::isKeyPressed(sf::Keyboard::V)) {
+            inputString = sf::Clipboard::getString();
+            applyText();
         }
 	}
     prevPress |= buttonText.isPressed();

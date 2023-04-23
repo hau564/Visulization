@@ -9,6 +9,7 @@ namespace layout {
 	namespace controlWindow {
 		sf::Vector2f size(Width, 60);
 		sf::Vector2f pos(0, Height - size.y);
+		sf::Text text;
 		sf::RectangleShape shape;
 
 		sf::Vector2f playSize(40, 40);
@@ -35,8 +36,9 @@ namespace layout {
 
 	namespace functionWindow {
 		sf::Vector2f size(200, 1000 - controlWindow::size.y);
-		sf::Vector2f pos(Width - size.x, Height - 1000);
+		sf::Vector2f pos(Width - size.x, Height - 1015);
 		sf::Vector2f blockSize(200, 50);
+		sf::Text text;
 		sf::RectangleShape shape;
 	}
 
@@ -44,6 +46,7 @@ namespace layout {
 		sf::Vector2f size(600, 300);
 		sf::Vector2f pos(0, Height - controlWindow::size.y - size.y);// functionWindow::pos.y);
 		sf::Vector2f blockSize(size.x, 30);
+		sf::Text text;
 		sf::RectangleShape shape;
 
 		int fontSize = 25;
@@ -52,6 +55,7 @@ namespace layout {
 	namespace displayWindow {
 		sf::Vector2f size(Width - functionWindow::size.x, functionWindow::size.y);
 		sf::Vector2f pos(functionWindow::pos.x - size.x, functionWindow::pos.y);
+		sf::Text text;
 		sf::RectangleShape shape;
 	}
 
@@ -67,7 +71,7 @@ namespace layout {
 
 	namespace display {
 
-		sf::Color normalColor = sf::Color::White;
+		sf::Color normalColor = style::backgroundColor;
 		sf::Color visitedColor = sf::Color::Cyan;
 		sf::Color considerColor = sf::Color::Blue;
 		sf::Color targetColor = sf::Color::Green;
@@ -94,21 +98,37 @@ namespace layout {
 		rect.setOutlineColor(outColor);
 	}
 
+	void createText(sf::Text& text, sf::Vector2f rectPos, std::string s) {
+		text.setFont(font);
+		text.setString("ÂÖgq|");
+		text.setCharacterSize(18);
+		text.setFillColor(style::textColor);
+		//text.setStyle(sf::Text::Underlined);
+		sf::FloatRect rect = text.getLocalBounds();
+		text.setPosition(rectPos.x, rectPos.y - rect.height);
+		text.setString(s);
+	}
+
 	void init() {
 		font.loadFromFile("font/arial.ttf");
 
-		setRectangle(functionWindow::shape, functionWindow::pos, functionWindow::size, sf::Color::Transparent, 1, sf::Color::Black);
-		setRectangle(sourceWindow::shape, sourceWindow::pos, sourceWindow::size, sf::Color::Transparent, 1, sf::Color::Black);
-		setRectangle(displayWindow::shape, displayWindow::pos, displayWindow::size, sf::Color::Transparent, 1, sf::Color::Black);
-		setRectangle(display::arrayBlock, sf::Vector2f(0, 0), display::arrayBlockSize, sf::Color::White, 1, sf::Color::Black);
+		setRectangle(functionWindow::shape, functionWindow::pos, functionWindow::size, sf::Color::Transparent, 1, style::outlineColor);
+		setRectangle(sourceWindow::shape, sourceWindow::pos, sourceWindow::size, sf::Color::Transparent, 1, style::outlineColor);
+		setRectangle(displayWindow::shape, displayWindow::pos, displayWindow::size, sf::Color::Transparent, 1, style::outlineColor);
+		setRectangle(display::arrayBlock, sf::Vector2f(0, 0), display::arrayBlockSize, style::backgroundColor, 1, style::outlineColor);
 
 		display::linkedListBlock.setRadius(display::arrayBlockSize.x / 2);
-		display::linkedListBlock.setFillColor(sf::Color::White);
+		display::linkedListBlock.setFillColor(style::backgroundColor);
 		display::linkedListBlock.setOutlineThickness(2);
-		display::linkedListBlock.setOutlineColor(sf::Color::Black);
+		display::linkedListBlock.setOutlineColor(style::outlineColor);
+
+		createText(layout::displayWindow::text, layout::displayWindow::pos, "Display:");
+		createText(layout::functionWindow::text, layout::functionWindow::pos, "Functions:");
+		createText(layout::controlWindow::text, layout::controlWindow::pos, "Control:");
 
 		structuresBar::bar.create(layout::structuresBar::pos, layout::structuresBar::blockSize, style::button::faces, layout::structuresBar::labels, layout::structuresBar::direction, layout::structuresBar::charSize);
-		
+		display::normalColor = style::backgroundColor;
+
 		for (int i = 0; i < 4; ++i)
 			arrow::t[i].loadFromFile(arrow::txt[i]);
 	}

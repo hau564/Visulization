@@ -12,6 +12,7 @@ namespace layout {
 		extern sf::Vector2f size;
 		extern sf::Vector2f pos;
 		extern sf::RectangleShape shape;
+		extern sf::Text text;
 
 		extern sf::Vector2f playPos, playSize;
 		extern int dis;
@@ -29,6 +30,7 @@ namespace layout {
 		extern sf::Vector2f size;
 		extern sf::Vector2f pos;
 		extern sf::Vector2f blockSize;
+		extern sf::Text text;
 
 		extern sf::RectangleShape shape;
 	}
@@ -37,12 +39,14 @@ namespace layout {
 		extern sf::Vector2f size;
 		extern sf::Vector2f pos;
 		extern sf::RectangleShape shape;
+		extern sf::Text text;
 	}
 
 	namespace sourceWindow {
 		extern sf::Vector2f size;
 		extern sf::Vector2f pos;
 		extern sf::Vector2f blockSize;
+		extern sf::Text text;
 
 		extern sf::RectangleShape shape;
 		
