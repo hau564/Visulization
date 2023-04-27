@@ -2,10 +2,11 @@
 
 #include<SFML/Graphics.hpp>
 #include "Function.h"
+#include "MyQueue.h"
 
 namespace queue {
-	extern std::vector<int> list;
-	extern Function create, push, pop, peek;
+	extern MyQueue list;
+	extern Function create, push, pop, peek, clear;
 
 	extern void init();
 	extern void run(sf::RenderWindow& window, sf::Event event);

@@ -71,7 +71,7 @@ bool Textbox::runRecommend(sf::RenderWindow& window, sf::Event event)
     if (recommendString.empty()) return false;
 
     static std::string prevState = "#";
-    if (prevState != inputString) {
+    if (1) {
         onRecommend.clear();
         for (std::string s : recommendString) {
             if (inputString == "" ||

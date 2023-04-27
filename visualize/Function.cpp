@@ -2,6 +2,7 @@
 #include "Style.h"
 #include "MousePos.h"
 #include "LoadFile.h"
+#include "Format.h"
 
 void Function::create(sf::Vector2f pos, sf::Vector2f size, std::string label, std::vector<std::string> inputLabels)
 {
@@ -21,7 +22,7 @@ void Function::create(sf::Vector2f pos, sf::Vector2f size, std::string label, st
 		sf::Vector2f siz = size + sf::Vector2f(-10, -10);
 		int d = 10, fontSize = 25;
 		file.create(pos, { (siz.x - d) / 2, siz.y }, style::button::faces, "File", 0, fontSize);
-		go.create(pos + sf::Vector2f((siz.x - d) / 2 + d, 0), {(siz.x - d) / 2, siz.y}, style::button::faces, "Go", 0, fontSize);
+		go.create(pos + sf::Vector2f((siz.x - d) / 2 + d, 0), {(siz.x - d) / 2, siz.y}, style::button::faces, "#Rand", 0, fontSize);
 	}
 }
 
@@ -40,18 +41,49 @@ bool Function::run(sf::RenderWindow& window, sf::Event event, std::vector<std::s
 				textboxActive = 1;
 			}
 		}
-		if (go.run(window, event) == Button::pressed) {	
+		int filled = 1;
+		for (Textbox& t : textboxes) filled &= (t.inputString != "");
+		
+		if (textboxes.size()) {
+			if (filled) {
+				go.text.setString("   Go");
+			}
+			else {
+				go.text.setString("#Rand");
+			}
+		}
+		if (go.run(window, event) == Button::pressed && go.justPressed()) {
 			if (textboxActive) {
 				if (go.isPressed()) go.state = Button::focused;
 			}
 			else {
-				for (Textbox& tbox : textboxes) {
-					get.push_back(tbox.inputString);
-					tbox.clear();
+				if (filled) {
+					for (Textbox& tbox : textboxes) {
+						get.push_back(tbox.inputString);
+						tbox.clear();
+					}
+					functionButton.run(window, event);
+					active = 0;
+					return true;
 				}
-				functionButton.run(window, event);
-				active = 0;
-				return true;
+				else {
+					for (Textbox& t : textboxes) if (t.inputString == "") {
+						t.inputString = format::toString(rand() % 15);
+						t.applyText();
+					}
+					if (std::string(textboxes.back().guideText.getString()).substr(0, 6) == "Values") {
+						int n;
+						format::toInt(textboxes[0].inputString, n);
+						std::string s = "";
+						for (int i = 1; i <= n; ++i) {
+							s += format::toString(rand() % 100);
+							if (i < n) s += ",";
+						}
+						textboxes.back().inputString = s;
+						textboxes.back().applyText();
+					}
+					return false;
+				}
 			}
 		}
 		sf::Vector2f mousePos = getMousePos(window);

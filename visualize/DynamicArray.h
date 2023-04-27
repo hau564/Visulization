@@ -5,7 +5,7 @@
 #include "Control.h"
 
 namespace dynamicArray {
-	extern Function create, update;
+	extern Function create, update, search;
 	extern Button grow;
 	extern std::vector<int> arr;
 	extern void init();

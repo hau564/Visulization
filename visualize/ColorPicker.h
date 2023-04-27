@@ -4,6 +4,7 @@
 #include "Textbox.h"
 #include "Button.h"
 #include "Format.h"
+#include "Style.h"
 
 namespace colorPicker {
 	extern int Width, Height;

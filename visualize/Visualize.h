@@ -36,3 +36,7 @@
 #include "CLinkedList.h"
 #include "Queue.h"
 #include "Stack.h"
+
+#include "MyStack.h"
+#include "MyQueue.h"
+#include "MyLL.h"

@@ -3,6 +3,7 @@
 #include "Button.h"
 #include "MousePos.h"
 #include "Style.h"
+#include "Layout.h"
 
 sf::RectangleShape ButtonFace::create(sf::Vector2f pos, sf::Vector2f size) {
 	sf::RectangleShape rect;
@@ -32,8 +33,7 @@ void Button::create(sf::Vector2f _pos, sf::Vector2f _size, Button4Faces state, c
 	mode = _mode;
 
 
-	Button::font.loadFromFile("font/arial.ttf");
-	Button::text.setFont(font);
+	Button::text.setFont(layout::font);
 	Button::text.setString(label);
 	Button::text.setCharacterSize(charSize ? charSize : (int)size.y / 2);
 

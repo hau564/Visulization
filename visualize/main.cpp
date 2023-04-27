@@ -85,6 +85,16 @@ void draw(sf::RenderWindow& window, std::string s) {
     }
     prevStruct = s;
 }
+
+void clear() {
+    staticArray::arr.clear();
+    dynamicArray::arr.clear();
+    linkedList::list.clear();
+    doublyLinkedList::list.clear();
+    circularLinkedList::list.clear();
+    queue::list.clear();
+    stack::list.clear();
+}
     
 int main()
 {
@@ -93,16 +103,20 @@ int main()
     sf::RenderWindow window(sf::VideoMode(style::Width, style::Height), "Visualize", sf::Style::Default,settings);
     window.setFramerateLimit(60);
 
+    initVariables();
     colorPicker::init();
     setting::init();
     style::refresh();
     initVariables();
+
+    
 
     std::string cStruct = "";
     while (window.isOpen()) {
         sf::Event event;
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
+                clear();
                 window.close();
             }
 

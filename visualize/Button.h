@@ -42,6 +42,4 @@ public:
 	sf::RectangleShape faces[4];
 	sf::Text text;
 	sf::Vector2f pos, size;
-
-	sf::Font font;
 };

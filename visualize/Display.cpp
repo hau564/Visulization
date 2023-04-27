@@ -3,6 +3,8 @@
 #include "Layout.h"
 #include "Control.h"
 #include "Source.h"
+#include "iostream"
+#include "fstream"
 
 namespace display {
 	std::vector<Layer> layers;
@@ -15,6 +17,15 @@ namespace display {
 
 	void start() {
 		control::start();
+
+		std::ofstream out("outputVisualizeData.txt");
+
+		for (ArrayNode node : layers.back().arr)
+			out << (std::string)node.text.getString() << " ";
+		for (LinkedListNode node : layers.back().list)
+			out << (std::string)node.text.getString() << " ";
+
+		out.close();
 	}
 
 	void addLayer(Layer layer, float weight, int checkPoint) {

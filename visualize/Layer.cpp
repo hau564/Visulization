@@ -90,13 +90,19 @@ void Layer::addCLinkedList(std::vector<int> llist, sf::Vector2f pos)
 	}
 }
 
-void Layer::addTextAbove(std::string s, LinkedListNode node, sf::Vector2f displace) {
+void Layer::addTextAbove(std::string s, sf::Vector2f pos, sf::Vector2f displace) {
 	text.push_back(sf::Text());
 	text.back().setFont(layout::font);
 	text.back().setCharacterSize(25);
 	text.back().setString(s);
-	text.back().setPosition(node.getPosition() + displace);
+	text.back().setPosition(pos + displace);
 	text.back().setFillColor(style::textColor);
+}
+void Layer::addTextAbove(std::string s, LinkedListNode node, sf::Vector2f displace) {
+	addTextAbove(s, node.getPosition(), displace);
+}
+void Layer::addTextAbove(std::string s, ArrayNode node, sf::Vector2f displace) {
+	addTextAbove(s, node.getPosition(), displace);
 }
 
 void Layer::addArrow(sf::Vector2f pos1, sf::Vector2f pos2)

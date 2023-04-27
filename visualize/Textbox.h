@@ -3,6 +3,7 @@
 #include<SFML/Graphics.hpp>
 #include<iostream>
 #include "Button.h"
+#include "Style.h"
 
 class Textbox {
 public:

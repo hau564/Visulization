@@ -35,8 +35,8 @@ namespace layout {
 	}
 
 	namespace functionWindow {
-		sf::Vector2f size(200, 1000 - controlWindow::size.y);
-		sf::Vector2f pos(Width - size.x, Height - 1015);
+		sf::Vector2f size(200, 1010 - controlWindow::size.y);
+		sf::Vector2f pos(Width - size.x, Height - 1010);
 		sf::Vector2f blockSize(200, 50);
 		sf::Text text;
 		sf::RectangleShape shape;

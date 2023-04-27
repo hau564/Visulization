@@ -5,14 +5,15 @@
 #include "Animation.h"
 
 namespace linkedList {
-	std::vector<int> list;
-	Function create, del, insert, search;
+	MyLL list;
+	Function create, update, del, insert, search;
 
 	void init() {
 		create.create(layout::functionWindow::pos, layout::functionWindow::blockSize, "Create", {"Size: ", "Values: "});
-		insert.create(layout::functionWindow::pos + sf::Vector2f(0, 1*layout::functionWindow::blockSize.y), layout::functionWindow::blockSize, "Insert", { "Pos: ", "Value: "});
-		del.create(layout::functionWindow::pos + sf::Vector2f(0,  2 * layout::functionWindow::blockSize.y), layout::functionWindow::blockSize, "Delete", { "Pos: "});
-		search.create(layout::functionWindow::pos + sf::Vector2f(0, 3*layout::functionWindow::blockSize.y), layout::functionWindow::blockSize, "Search", { "First of: "});
+		update.create(layout::functionWindow::pos + sf::Vector2f(0, 1*layout::functionWindow::blockSize.y), layout::functionWindow::blockSize, "Update", { "Pos: ", "Value: "});
+		insert.create(layout::functionWindow::pos + sf::Vector2f(0, 2*layout::functionWindow::blockSize.y), layout::functionWindow::blockSize, "Insert", { "Pos: ", "Value: "});
+		del.create(layout::functionWindow::pos + sf::Vector2f(0,    3*layout::functionWindow::blockSize.y), layout::functionWindow::blockSize, "Delete", { "Pos: "});
+		search.create(layout::functionWindow::pos + sf::Vector2f(0, 4*layout::functionWindow::blockSize.y), layout::functionWindow::blockSize, "Search", { "First of: "});
 
 		del.textboxes[0].addStringRecommend({ "0123", "head", "tail" });
 		insert.textboxes[0].addStringRecommend({ "0123", "head", "tail" });
@@ -21,22 +22,17 @@ namespace linkedList {
 	void Create(std::string _n, std::string _values) {
 		int n;
 		if (!format::toInt(_n, n)) return;
-		if (!format::toVectorInt(_values, list)) return;
 
-		if (_n == "") n = rand() % 10 + 1;
-		if (list.empty()) {
-			for (int i = 0; i < n; ++i)
-				list.push_back(rand() % 100);
-		}
-		else {
-			while (list.size() < n)
-				list.push_back(0);
-		}
+		std::vector<int> val;
+		if (!format::toVectorInt(_values, val)) return;
+
+		list.clear();
+		for (int x : val) list.ins(list.size(), x);
 
 		display::deleteDisplay();
 
 		Layer layer;
-		layer.addLinkedList(list);
+		layer.addLinkedList(list.getValues());
 		if (list.size()) {
 			layer.addTextAbove("head", layer.list[0], {-30, -30});
 			layer.addTextAbove("tail", layer.list.back(), {30, -30});
@@ -57,7 +53,7 @@ namespace linkedList {
 		std::vector<int> ord;
 
 		if (list.size()) {
-			layer.addLinkedList(list);
+			layer.addLinkedList(list.getValues());
 			layer.addTextAbove("head", layer.list[0], { -30, -30 });
 			layer.addTextAbove("tail", layer.list.back(), { 30, -30 });
 		}
@@ -90,12 +86,9 @@ namespace linkedList {
 		display::addLayer(layer);
 		ord.push_back(-1);
 
-		list.push_back(0);
-		for (int i = (int)list.size() - 1; i; --i)
-			list[i] = list[i - 1];
-		list[0] = val;
+		list.ins(0, val);
 		layer.clear();
-		layer.addLinkedList(list);
+		layer.addLinkedList(list.getValues());
 		layer.addTextAbove("head", layer.list[0], { -30, -30 });
 		layer.addTextAbove("tail", layer.list.back(), { 30, -30 });
 
@@ -117,7 +110,7 @@ namespace linkedList {
 		Layer layer;
 		std::vector<int> ord;
 
-		layer.addLinkedList(list);
+		layer.addLinkedList(list.getValues());
 		layer.addTextAbove("head", layer.list[0], { -30, -30 });
 		layer.addTextAbove("tail", layer.list.back(), { 30, -30 });
 
@@ -126,16 +119,16 @@ namespace linkedList {
 		display::addLayer(layer);
 		ord.push_back(0);
 
-		list.push_back(val);
+		list.ins(list.size(), val);
 		layer.clear();
-		layer.addLinkedList(list);
+		layer.addLinkedList(list.getValues());
 		layer.addTextAbove("head", layer.list[0], { -30, -30 });
 		layer.addTextAbove("tail", layer.list.end()[-2], { 30, -30 });
 		display::addLayer(layer);
 		ord.push_back(1);
 
 		layer.clear();
-		layer.addLinkedList(list);
+		layer.addLinkedList(list.getValues());
 		layer.addTextAbove("head", layer.list[0], { -30, -30 });
 		layer.addTextAbove("tail", layer.list.back(), { 30, -30 });
 		display::addLayer(layer);
@@ -156,7 +149,7 @@ namespace linkedList {
 		if (pos == (int)list.size()) return insertTail(val);
 
 		display::deleteDisplay();
-		display::addSource({"if Pos not in [0;N-1]: return",
+		display::addSource({"if Pos not in [0;N]: return",
 							"cur = head",
 							"for i = 1 to Pos - 1:",
 							"     cur = cur->next",
@@ -167,7 +160,7 @@ namespace linkedList {
 		Layer layer;
 		std::vector<int> ord;
 
-		layer.addLinkedList(list);
+		layer.addLinkedList(list.getValues());
 		if (list.size()) {
 			layer.addTextAbove("head", layer.list[0], { -30, -30 });
 			layer.addTextAbove("tail", layer.list.back(), { 30, -30 });
@@ -220,13 +213,10 @@ namespace linkedList {
 		display::addLayer(layer);
 		ord.push_back(-1);
 
-		list.push_back(0);
-		for (int i = (int)list.size() - 1; i > pos; --i)
-			list[i] = list[i - 1];
-		list[pos] = val;
+		list.ins(pos, val);
 
 		Layer layer1;
-		layer1.addLinkedList(list);
+		layer1.addLinkedList(list.getValues());
 		layer1.addTextAbove("head", layer1.list[0], { -30, -30 });
 		layer1.addTextAbove("tail", layer1.list.back(), { 30, -30 });
 
@@ -281,7 +271,7 @@ namespace linkedList {
 		std::vector<int> ord;
 		Layer layer;
 
-		layer.addLinkedList(list);
+		layer.addLinkedList(list.getValues());
 		layer.addTextAbove("head", layer.list[0], { -30, -30 });
 		layer.addTextAbove("tail", layer.list.back(), { 30, -30 });
 		display::addLayer(layer);
@@ -289,9 +279,7 @@ namespace linkedList {
 		display::addLayer(layer);
 		ord.push_back(0);
 
-		for (int i = 0; i < (int)list.size() - 1; ++i)
-			list[i] = list[i + 1];
-		list.pop_back();
+		list.del(0);
 
 		display::addLayer(layer);
 		ord.push_back(1);
@@ -317,7 +305,7 @@ namespace linkedList {
 		if (list.size()) {
 			sf::Vector2f newPos = layer.list[1].getPosition();
 			layer.clear();
-			layer.addLinkedList(list, newPos);
+			layer.addLinkedList(list.getValues(), newPos);
 			layer.addTextAbove("head", layer.list[0], { -30, -30 });
 			layer.addTextAbove("tail", layer.list.back(), { 30, -30 });
 			display::addLayer(layer);
@@ -325,7 +313,7 @@ namespace linkedList {
 		}
 
 		layer.clear();
-		layer.addLinkedList(list);
+		layer.addLinkedList(list.getValues());
 		if (list.size()) {
 			layer.addTextAbove("head", layer.list[0], { -30, -30 });
 			layer.addTextAbove("tail", layer.list.back(), { 30, -30 });
@@ -362,7 +350,7 @@ namespace linkedList {
 		std::vector<int> ord;
 		Layer layer;
 
-		layer.addLinkedList(list);
+		layer.addLinkedList(list.getValues());
 		layer.addTextAbove("head", layer.list[0], { -30, -30 });
 		layer.addTextAbove("tail", layer.list.back(), { 30, -30 });
 		display::addLayer(layer);
@@ -408,16 +396,16 @@ namespace linkedList {
 		ord.push_back(5);
 
 		sf::Vector2f newPos = layer.list[0].getPosition();
-		list.pop_back();
+		list.del(list.size() - 1);
 		layer.clear();
-		layer.addLinkedList(list, newPos);
+		layer.addLinkedList(list.getValues(), newPos);
 		layer.addTextAbove("head", layer.list[0], { -30, -30 });
 		layer.addTextAbove("tail", layer.list.back(), { 30, -30 });
 		display::addLayer(layer);
 		ord.push_back(-1);
 
 		layer.clear();
-		layer.addLinkedList(list);
+		layer.addLinkedList(list.getValues());
 		layer.addTextAbove("head", layer.list[0], { -30, -30 });
 		layer.addTextAbove("tail", layer.list.back(), { 30, -30 });
 		display::addLayer(layer);
@@ -451,8 +439,14 @@ namespace linkedList {
 							"delete temp"});
 
 		if (list.empty() || pos >= list.size()) {
+			Layer layer;
+			layer.addLinkedList(list.getValues());
+			if (list.size()) {
+				layer.addTextAbove("head", layer.list[0], { -30, -30 });
+				layer.addTextAbove("tail", layer.list.back(), { 30, -30 });
+			}
 			for (int i = 0; i < 3; ++i) {
-				display::addLayer(Layer());
+				display::addLayer(layer);
 			}
 			display::addSourceOrder({ -1, 0, -1 });
 			display::start();
@@ -462,7 +456,7 @@ namespace linkedList {
 		Layer layer;
 		std::vector<int> ord;
 
-		layer.addLinkedList(list);
+		layer.addLinkedList(list.getValues());
 		layer.addTextAbove("head", layer.list[0], { -30, -30 });
 		layer.addTextAbove("tail", layer.list.back(), { 30, -30 });
 		display::addLayer(layer);
@@ -493,7 +487,7 @@ namespace linkedList {
 		display::addLayer(layer);
 		ord.push_back(4);
 
-		layer.list[cur + 1].create(layer.list[cur + 1].getPosition() + sf::Vector2f(0, -100), list[cur + 1]);
+		layer.list[cur + 1].create(layer.list[cur + 1].getPosition() + sf::Vector2f(0, -100), list.getValues()[cur + 1]);
 		layer.arrow[cur].create(layer.list[cur], layer.list[cur + 1]);
 		layer.arrow[cur + 1].create(layer.list[cur + 1], layer.list[cur + 2]);
 		
@@ -514,12 +508,10 @@ namespace linkedList {
 		display::addLayer(layer);
 		ord.push_back(-1);
 
-		for (int i = cur + 1; i < (int)list.size() - 1; ++i)
-			list[i] = list[i + 1];
-		list.pop_back();
+		list.del(pos);
 
 		layer.clear();
-		layer.addLinkedList(list);
+		layer.addLinkedList(list.getValues());
 		layer.addTextAbove("head", layer.list[0], { -30, -30 });
 		layer.addTextAbove("tail", layer.list.back(), { 30, -30 });
 		display::addLayer(layer);
@@ -544,7 +536,7 @@ namespace linkedList {
 		std::vector<int> ord;
 
 		Layer layer;
-		layer.addLinkedList(list);
+		layer.addLinkedList(list.getValues());
 		if (!list.empty()) layer.addTextAbove("head", layer.list[0], { -30, -30 });
 		if (!list.empty()) layer.addTextAbove("tail", layer.list.back(), { 30, -30 });
 		display::addLayer(layer);
@@ -556,7 +548,8 @@ namespace linkedList {
 		display::addLayer(layer);
 		ord.push_back(0);
 
-		while (cur < (int)list.size() && list[cur] != x) {
+		std::vector<int> vlist = list.getValues();
+		while (cur < (int)list.size() && vlist[cur] != x) {
 			layer.list[cur].beTarget();
 			for (int i = 1; i < 3; ++i) {
 				if (i != 1 && cur < (int)layer.list.size() - 1) layer.list[cur + 1].beVisited();
@@ -590,9 +583,76 @@ namespace linkedList {
 		display::start();
 	}
 
+	void Update(std::string _pos, std::string _val) {
+		int pos, val;
+		if (!format::toInt(_pos, pos)) return;
+		if (!format::toInt(_val, val)) return;
+		if (pos < 0 || pos >= (int)list.size()) return;
+
+		display::deleteDisplay();
+
+		display::addSource({ "Node cur = head",
+							"for i from 1 to Pos",
+							"     cur = cur->next",
+							"cur->val = Value" });
+
+		std::vector<int> ord;
+
+		Layer layer;
+		layer.addLinkedList(list.getValues());
+		if (!list.empty()) layer.addTextAbove("head", layer.list[0], { -30, -30 });
+		if (!list.empty()) layer.addTextAbove("tail", layer.list.back(), { 30, -30 });
+		display::addLayer(layer);
+		ord.push_back(-1);
+
+		int cur = 0;
+		if (!list.empty()) {
+			layer.addTextAbove("cur", layer.list[0], { 0, 50 });
+			layer.list[0].beTarget();
+		}
+		display::addLayer(layer);
+		ord.push_back(0);
+
+		for (int i = 1; i <= pos; ++i) {
+			layer.list[cur].beTarget();
+			for (int i = 1; i < 3; ++i) {
+				if (i != 1 && cur < (int)layer.list.size() - 1) layer.list[cur + 1].beVisited();
+				display::addLayer(layer);
+				ord.push_back(i);
+			}
+
+			layer.list[cur].beNormal();
+			layer.text.pop_back();
+
+			++cur;
+			if (cur < list.size()) {
+				layer.addTextAbove("cur", layer.list[cur], { 0, 50 });
+			}
+		}
+
+		if (cur < list.size()) layer.list[cur].beTarget();
+		for (int i = 1; i <= 3; i += 2) {
+			display::addLayer(layer);
+			ord.push_back(i);
+		}
+
+		list.upd(pos, val);
+		layer.clear();
+		layer.addLinkedList(list.getValues());
+		if (!list.empty()) layer.addTextAbove("head", layer.list[0], { -30, -30 });
+		if (!list.empty()) layer.addTextAbove("tail", layer.list.back(), { 30, -30 });
+
+		display::addLayer(layer);
+		ord.push_back(-1);
+
+		display::addSourceOrder(ord);
+		display::start();
+	}
+
 	void run(sf::RenderWindow& window, sf::Event event) {
 		std::vector<std::string> get;
 		if (create.run(window, event, get)) Create(get[0], get[1]);
+		if (update.run(window, event, get)) Update(get[0], get[1]);
 		if (insert.run(window, event, get)) Insert(get[0], get[1]);
 		if (del.run(window, event, get)) Delete(get[0]);
 		if (search.run(window, event, get)) Search(get[0]);
@@ -602,11 +662,13 @@ namespace linkedList {
 
 	void draw(sf::RenderWindow& window) {
 		create.draw(window);
+		update.draw(window);
 		insert.draw(window);
 		del.draw(window);
 		search.draw(window);
 
 		if (create.functionButton.isPressed() || create.functionButton.isFocused()) create.draw(window);
+		if (update.functionButton.isPressed() || update.functionButton.isFocused()) update.draw(window);
 		if (insert.functionButton.isPressed() || insert.functionButton.isFocused()) insert.draw(window);
 		if (del.functionButton.isPressed() || del.functionButton.isFocused()) del.draw(window);
 		if (search.functionButton.isPressed() || search.functionButton.isFocused()) search.draw(window);

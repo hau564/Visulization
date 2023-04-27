@@ -64,6 +64,7 @@ namespace setting {
 
 	void init() {
 		settingButton.create({layout::controlWindow::pos.x + layout::controlWindow::size.x - layout::controlWindow::size.y, layout::controlWindow::pos.y}, {layout::controlWindow::size.y, layout::controlWindow::size.y}, { "images/setting.png" });
+        
         int n = 7;
         texts.assign(n, sf::Text());
         colTexts.assign(n, sf::Text());
@@ -73,11 +74,13 @@ namespace setting {
             int py = down + i * (blockHeight + down);
 
             texts[i].setFont(layout::font);
-            texts[i].setString(opts[i]);
+            texts[i].setString("ÂÖgq|");
             texts[i].setCharacterSize(30);
             texts[i].setFillColor(sf::Color::Black);
-            texts[i].setOrigin(0, texts[i].getLocalBounds().height / 2);
-            texts[i].setPosition(lr, py + blockHeight / 2);
+            sf::FloatRect rect = texts[i].getLocalBounds();
+            texts[i].setOrigin(0, rect.height / 2);
+            texts[i].setPosition(1.f * lr, 1.f * py + 1.f * blockHeight / 2 - 5);
+            texts[i].setString(opts[i]);
 
             colTexts[i].setFont(layout::font);
             colTexts[i].setCharacterSize(30);
@@ -92,12 +95,16 @@ namespace setting {
         loadRect();
 
         float length = (Width - 3 * lr) / 2;
-        float py = down + 7 * (blockHeight + down);
-        dark.create({ 1.f * lr, py }, { length, 1.f *blockHeight }, style::button::defaultButton::faces, "Night theme", 0, 30);
-        reset.create({ length + 2 * lr, py }, { length, 1.f * blockHeight }, style::button::defaultButton::faces, "Reset default", 0, 30);
-
+        int py = down + 7 * (blockHeight + down);
+        dark.create({ 1.f * lr, 1.f * py }, { length, 1.f *blockHeight }, style::button::defaultButton::faces, "Night theme", 0, 30);
+        reset.create({ length + 2 * lr, 1.f * py }, { length, 1.f * blockHeight }, style::button::defaultButton::faces, "Reset default", 0, 30);
+        
         py = down + 8 * (blockHeight + down);
-        apply.create({ 1.f * lr, py }, { 1.f * Width - 2 * lr, 1.f * blockHeight }, style::button::defaultButton::faces, "Delete visualize data and apply changes", 0, 30);
+        apply.create({ 1.f * lr, 1.f * py }, { 1.f * Width - 2 * lr, 1.f * blockHeight }, style::button::defaultButton::faces, "Delete visualize data and apply changes", 0, 30);
+
+        dark.text.setFillColor(sf::Color::Black);
+        reset.text.setFillColor(sf::Color::Black);
+        apply.text.setFillColor(sf::Color::Black);
 	}
 
 	bool run(sf::RenderWindow& win, sf::Event& event) {
@@ -147,6 +154,7 @@ namespace setting {
                     }
                     window.close();
                     style::refresh();
+                    apply.resetState();
                     
                     return true;
                 }

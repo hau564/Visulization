@@ -203,6 +203,7 @@ namespace colorPicker {
 				bbox.run(window, event);
 				if (load.isPressed() && event.type == sf::Event::MouseButtonReleased) {
 					window.close();
+					load.resetState();
 					return col.getFillColor();
 				}
 				load.run(window, event);

@@ -135,14 +135,17 @@
     <ClCompile Include="CLinkedList.cpp">
       <Filter>Source Files\StructsFunction</Filter>
     </ClCompile>
-    <ClCompile Include="LoadFile.cpp">
-      <Filter>Source Files\InternalToolsFunction</Filter>
-    </ClCompile>
     <ClCompile Include="ColorPicker.cpp">
       <Filter>Source Files\ToolsFunction</Filter>
     </ClCompile>
     <ClCompile Include="Setting.cpp">
       <Filter>Source Files\Design</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadFile.cpp">
+      <Filter>Source Files\ToolsFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="MyLL.cpp">
+      <Filter>Source Files\StructsFunction</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -230,14 +233,26 @@
     <ClInclude Include="DLinkedList.h">
       <Filter>Header Files\Structs</Filter>
     </ClInclude>
-    <ClInclude Include="LoadFile.h">
-      <Filter>Header Files\InternalTools</Filter>
-    </ClInclude>
     <ClInclude Include="ColorPicker.h">
       <Filter>Header Files\Tools</Filter>
     </ClInclude>
     <ClInclude Include="Setting.h">
       <Filter>Header Files\Design</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadFile.h">
+      <Filter>Header Files\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="MyStack.h">
+      <Filter>Header Files\Structs</Filter>
+    </ClInclude>
+    <ClInclude Include="Node.h">
+      <Filter>Header Files\Structs</Filter>
+    </ClInclude>
+    <ClInclude Include="MyQueue.h">
+      <Filter>Header Files\Structs</Filter>
+    </ClInclude>
+    <ClInclude Include="MyLL.h">
+      <Filter>Header Files\Structs</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

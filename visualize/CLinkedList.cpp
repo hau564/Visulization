@@ -6,13 +6,14 @@
 
 namespace circularLinkedList {
 	std::vector<int> list;
-	Function create, del, insert, search;
+	Function create, update, del, insert, search;
 
 	void init() {
 		create.create(layout::functionWindow::pos, layout::functionWindow::blockSize, "Create", { "Size: ", "Values: " });
-		insert.create(layout::functionWindow::pos + sf::Vector2f(0, 1 * layout::functionWindow::blockSize.y), layout::functionWindow::blockSize, "Insert", { "Pos: ", "Value: " });
-		del.create(layout::functionWindow::pos + sf::Vector2f(0, 2 * layout::functionWindow::blockSize.y), layout::functionWindow::blockSize, "Delete", { "Pos: " });
-		search.create(layout::functionWindow::pos + sf::Vector2f(0, 3 * layout::functionWindow::blockSize.y), layout::functionWindow::blockSize, "Search", { "First of: " });
+		update.create(layout::functionWindow::pos + sf::Vector2f(0, 1 * layout::functionWindow::blockSize.y), layout::functionWindow::blockSize, "Update", { "Pos: ", "Value: " });
+		insert.create(layout::functionWindow::pos + sf::Vector2f(0, 2 * layout::functionWindow::blockSize.y), layout::functionWindow::blockSize, "Insert", { "Pos: ", "Value: " });
+		del.create(layout::functionWindow::pos + sf::Vector2f(0, 3 * layout::functionWindow::blockSize.y), layout::functionWindow::blockSize, "Delete", { "Pos: " });
+		search.create(layout::functionWindow::pos + sf::Vector2f(0, 4 * layout::functionWindow::blockSize.y), layout::functionWindow::blockSize, "Search", { "First of: " });
 
 		del.textboxes[0].addStringRecommend({ "0123", "head" });
 		insert.textboxes[0].addStringRecommend({ "0123", "head" });
@@ -414,10 +415,10 @@ namespace circularLinkedList {
 		if (_pos == "head") DeleteHead();
 		if (!format::toInt(_pos, pos)) return;
 
-		if (_pos == "") pos = rand() % (int)list.size();
+		if (_pos == "" && !list.empty()) pos = rand() % (int)list.size();
 		if (pos == 0) return DeleteHead();
 
-		if (list.size() == 1) {
+		if (list.size() == 1 && pos == 0) {
 			DeleteHead();
 			return;
 		}
@@ -434,6 +435,9 @@ namespace circularLinkedList {
 		if (list.empty() || pos >= list.size()) {
 			Layer layer;
 			layer.addCLinkedList(list);
+			if (list.size()) {
+				layer.addTextAbove("head", layer.list[0], { -30, -30 });
+			}
 			for (int i = 0; i < 3; ++i) {
 				display::addLayer(layer);
 			}
@@ -610,9 +614,74 @@ namespace circularLinkedList {
 		display::start();
 	}
 
+	void Update(std::string _pos, std::string _val) {
+		int pos, val;
+		if (!format::toInt(_pos, pos)) return;
+		if (!format::toInt(_val, val)) return;
+		if (pos < 0 || pos >= (int)list.size()) return;
+
+		display::deleteDisplay();
+
+		display::addSource({ "Node cur = head",
+							"for i from 1 to Pos",
+							"     cur = cur->next",
+							"cur->val = Value" });
+
+		std::vector<int> ord;
+
+		Layer layer;
+		layer.addCLinkedList(list);
+		if (!list.empty()) layer.addTextAbove("head", layer.list[0], { -30, -30 });
+		display::addLayer(layer);
+		ord.push_back(-1);
+
+		int cur = 0;
+		if (!list.empty()) {
+			layer.addTextAbove("cur", layer.list[0], { 0, 50 });
+			layer.list[0].beTarget();
+		}
+		display::addLayer(layer);
+		ord.push_back(0);
+
+		for (int i = 1; i <= pos; ++i) {
+			layer.list[cur].beTarget();
+			for (int i = 1; i < 3; ++i) {
+				if (i != 1 && cur < (int)layer.list.size() - 1) layer.list[cur + 1].beVisited();
+				display::addLayer(layer);
+				ord.push_back(i);
+			}
+
+			layer.list[cur].beNormal();
+			layer.text.pop_back();
+
+			++cur;
+			if (cur < list.size()) {
+				layer.addTextAbove("cur", layer.list[cur], { 0, 50 });
+			}
+		}
+
+		if (cur < list.size()) layer.list[cur].beTarget();
+		for (int i = 1; i <= 3; i += 2) {
+			display::addLayer(layer);
+			ord.push_back(i);
+		}
+
+		list[pos] = val;
+		layer.clear();
+		layer.addCLinkedList(list);
+		if (!list.empty()) layer.addTextAbove("head", layer.list[0], { -30, -30 });
+
+		display::addLayer(layer);
+		ord.push_back(-1);
+
+		display::addSourceOrder(ord);
+		display::start();
+	}
+
 	void run(sf::RenderWindow& window, sf::Event event) {
 		std::vector<std::string> get;
 		if (create.run(window, event, get)) Create(get[0], get[1]);
+		if (update.run(window, event, get)) Update(get[0], get[1]);
 		if (insert.run(window, event, get)) Insert(get[0], get[1]);
 		if (del.run(window, event, get)) Delete(get[0]);
 		if (search.run(window, event, get)) Search(get[0]);
@@ -622,11 +691,13 @@ namespace circularLinkedList {
 
 	void draw(sf::RenderWindow& window) {
 		create.draw(window);
+		update.draw(window);
 		insert.draw(window);
 		del.draw(window);
 		search.draw(window);
 
 		if (create.functionButton.isPressed() || create.functionButton.isFocused()) create.draw(window);
+		if (update.functionButton.isPressed() || update.functionButton.isFocused()) update.draw(window);
 		if (insert.functionButton.isPressed() || insert.functionButton.isFocused()) insert.draw(window);
 		if (del.functionButton.isPressed() || del.functionButton.isFocused()) del.draw(window);
 		if (search.functionButton.isPressed() || search.functionButton.isFocused()) search.draw(window);

@@ -1,29 +1,53 @@
-﻿  Layout.cpp
-C:\Users\MAC_LENOVO\source\repos\visualize\visualize\Layout.cpp(10,21): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+﻿  CLinkedList.cpp
+C:\Users\MAC_LENOVO\source\repos\visualize\visualize\CLinkedList.cpp(132,22): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\MAC_LENOVO\source\repos\visualize\visualize\CLinkedList.cpp(158,18): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\MAC_LENOVO\source\repos\visualize\visualize\CLinkedList.cpp(161,90): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\MAC_LENOVO\source\repos\visualize\visualize\CLinkedList.cpp(162,74): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\MAC_LENOVO\source\repos\visualize\visualize\CLinkedList.cpp(165,79): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\MAC_LENOVO\source\repos\visualize\visualize\CLinkedList.cpp(172,38): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\MAC_LENOVO\source\repos\visualize\visualize\CLinkedList.cpp(250,81): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\MAC_LENOVO\source\repos\visualize\visualize\Layout.cpp(25,39): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+C:\Users\MAC_LENOVO\source\repos\visualize\visualize\CLinkedList.cpp(277,22): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\MAC_LENOVO\source\repos\visualize\visualize\CLinkedList.cpp(281,75): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\MAC_LENOVO\source\repos\visualize\visualize\CLinkedList.cpp(283,90): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\MAC_LENOVO\source\repos\visualize\visualize\CLinkedList.cpp(284,74): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\MAC_LENOVO\source\repos\visualize\visualize\CLinkedList.cpp(287,79): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\MAC_LENOVO\source\repos\visualize\visualize\CLinkedList.cpp(294,38): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\MAC_LENOVO\source\repos\visualize\visualize\CLinkedList.cpp(391,18): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\MAC_LENOVO\source\repos\visualize\visualize\CLinkedList.cpp(395,75): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\MAC_LENOVO\source\repos\visualize\visualize\CLinkedList.cpp(397,74): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\MAC_LENOVO\source\repos\visualize\visualize\CLinkedList.cpp(403,38): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\MAC_LENOVO\source\repos\visualize\visualize\CLinkedList.cpp(483,22): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\MAC_LENOVO\source\repos\visualize\visualize\CLinkedList.cpp(517,18): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\MAC_LENOVO\source\repos\visualize\visualize\CLinkedList.cpp(521,75): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\MAC_LENOVO\source\repos\visualize\visualize\CLinkedList.cpp(523,74): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\MAC_LENOVO\source\repos\visualize\visualize\CLinkedList.cpp(529,38): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\MAC_LENOVO\source\repos\visualize\visualize\Arrow.h(28,10): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\MAC_LENOVO\source\repos\visualize\visualize\CLinkedList.cpp(128): message : see reference to function template instantiation 'Arrow::Arrow<_Ty,_Ty>(Obj1,Obj2)' being compiled
           with
           [
-              T=float
+              _Ty=LinkedListNode,
+              Obj1=LinkedListNode,
+              Obj2=LinkedListNode
           ]
-C:\Users\MAC_LENOVO\source\repos\visualize\visualize\Layout.cpp(39,43): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+C:\Users\MAC_LENOVO\source\repos\visualize\visualize\Arrow.h(35,22): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\MAC_LENOVO\source\repos\visualize\visualize\Arrow.h(40,10): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\MAC_LENOVO\source\repos\visualize\visualize\CLinkedList.cpp(133): message : see reference to function template instantiation 'void Arrow::create<_Ty,_Ty>(Obj1,Obj2)' being compiled
           with
           [
-              T=float
+              _Ty=LinkedListNode,
+              Obj1=LinkedListNode,
+              Obj2=LinkedListNode
           ]
-C:\Users\MAC_LENOVO\source\repos\visualize\visualize\Layout.cpp(66,32): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-C:\Users\MAC_LENOVO\source\repos\visualize\visualize\Layout.cpp(97,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\MAC_LENOVO\source\repos\visualize\visualize\Arrow.h(47,22): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  CLinkedList.h
 x64\Release\CLinkedList.obj : warning LNK4042: object specified more than once; extras ignored
   Generating code
-  244 of 1583 functions (15.4%) were compiled, the rest were copied from previous compilation.
+  0 of 1644 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    6 functions had inline decision re-evaluated but remain unchanged
+    0 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   visualize.vcxproj -> C:\Users\MAC_LENOVO\source\repos\visualize\x64\Release\visualize.exe

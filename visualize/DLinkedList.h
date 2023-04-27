@@ -2,9 +2,10 @@
 
 #include<SFML/Graphics.hpp>
 #include "Function.h"
+#include "MyLL.h"
 
 namespace doublyLinkedList {
-	extern std::vector<int> list;
+	extern MyLL list;
 	extern Function create, update, del, insert, search;
 
 	extern void init();
