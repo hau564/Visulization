@@ -2,10 +2,10 @@
 
 #include<SFML/Graphics.hpp>
 #include "Function.h"
-#include "MyLL.h"
+#include "MyDLL.h"
 
 namespace doublyLinkedList {
-	extern MyLL list;
+	extern MyDLL list;
 	extern Function create, update, del, insert, search;
 
 	extern void init();

@@ -124,6 +124,7 @@ int main()
             
             run(window, event, cStruct);
             if (setting::run(window, event)) {
+                setting::init();
                 initVariables();
             }
         }
@@ -131,9 +132,9 @@ int main()
         window.clear(style::backgroundColor);
         
         
+        setting::draw(window);
         layout::structuresBar::bar.draw(window);
         draw(window, cStruct);
-        setting::draw(window);
         //std::cout << control::slideId << " " << control::slideStart << " " << control::cur << "\n";
                 
         window.display();

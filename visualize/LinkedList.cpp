@@ -674,5 +674,15 @@ namespace linkedList {
 		if (search.functionButton.isPressed() || search.functionButton.isFocused()) search.draw(window);
 
 		display::draw(window);
+		if (!list.empty() && display::layers.empty()) {
+			Layer layer;
+			layer.addLinkedList(list.getValues());
+			layer.addTextAbove("head", layer.list[0], { -30, -30 });
+			layer.addTextAbove("tail", layer.list.back(), { 30, -30 });
+
+			display::addLayer(layer);
+			display::addSourceOrder({ -1 });
+			display::start();
+		}
 	}
 }

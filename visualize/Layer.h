@@ -13,7 +13,7 @@ public:
 	std::vector<sf::Text> text;
 	int up = 100;
 
-	void addArray(std::vector<int> a, sf::Vector2f pos = { 0, 0 });
+	void addArray(std::vector<int> a, sf::Vector2f pos = { 0, 0 }, int cap = -1);
 	void addLinkedList(std::vector<int> llist, sf::Vector2f pos = { 0, 0 });
 	void addDLinkedList(std::vector<int> llist, sf::Vector2f pos = { 0, 0 });
 	void addCLinkedList(std::vector<int> llist, sf::Vector2f pos = { 0, 0 });

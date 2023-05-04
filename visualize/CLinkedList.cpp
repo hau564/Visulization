@@ -1,11 +1,11 @@
-#include "LinkedList.h"
+#include "CLinkedList.h"
 #include "Layout.h"
 #include "Display.h"
 #include "Format.h"
 #include "Animation.h"
 
 namespace circularLinkedList {
-	std::vector<int> list;
+	MyLL list;
 	Function create, update, del, insert, search;
 
 	void init() {
@@ -22,22 +22,17 @@ namespace circularLinkedList {
 	void Create(std::string _n, std::string _values) {
 		int n;
 		if (!format::toInt(_n, n)) return;
-		if (!format::toVectorInt(_values, list)) return;
 
-		if (_n == "") n = rand() % 10 + 1;
-		if (list.empty()) {
-			for (int i = 0; i < n; ++i)
-				list.push_back(rand() % 100);
-		}
-		else {
-			while (list.size() < n)
-				list.push_back(0);
-		}
+		std::vector<int> val;
+		if (!format::toVectorInt(_values, val)) return;
+		
+		list.clear();
+		for (int x : val) list.ins(list.size(), x);
 
 		display::deleteDisplay();
 
 		Layer layer;
-		layer.addCLinkedList(list);
+		layer.addCLinkedList(list.getValues());
 		if (list.size()) {
 			layer.addTextAbove("head", layer.list[0], { -30, -30 });
 		}
@@ -63,7 +58,7 @@ namespace circularLinkedList {
 		Layer layer;
 		std::vector<int> ord;
 
-		layer.addCLinkedList(list);
+		layer.addCLinkedList(list.getValues());
 		if (list.size()) {
 			layer.addTextAbove("head", layer.list[0], { -30, -30 });
 		}
@@ -76,8 +71,8 @@ namespace circularLinkedList {
 			display::addLayer(layer);
 			ord.push_back(1);
 
-			list.push_back(val);
-			layer.addCLinkedList(list);
+			list.ins(0, val);
+			layer.addCLinkedList(list.getValues());
 			layer.addTextAbove("head", layer.list[0], { -30, -30 });
 			layer.list[0].beTarget();
 			layer.arrow.pop_back();
@@ -85,7 +80,7 @@ namespace circularLinkedList {
 			ord.push_back(2);
 			
 			layer.clear();
-			layer.addCLinkedList(list);
+			layer.addCLinkedList(list.getValues());
 			layer.addTextAbove("head", layer.list[0], { -30, -30 });
 			display::addLayer(layer);
 			ord.push_back(3);
@@ -142,14 +137,10 @@ namespace circularLinkedList {
 		display::addLayer(layer);
 		ord.push_back(-1);
 
-		list.push_back(0);
-		for (int i = (int)list.size() - 1; i; --i)
-			list[i] = list[i - 1];
-		list[0] = val;
-
+		list.ins(0, val);
 
 		Layer layer1;
-		layer1.addCLinkedList(list);
+		layer1.addCLinkedList(list.getValues());
 		layer1.addTextAbove("head", layer1.list[0], { -30, -30 });
 
 		Layer layerTrans = layer1;
@@ -204,7 +195,7 @@ namespace circularLinkedList {
 		Layer layer;
 		std::vector<int> ord;
 
-		layer.addCLinkedList(list);
+		layer.addCLinkedList(list.getValues());
 		if (list.size()) {
 			layer.addTextAbove("head", layer.list[0], { -30, -30 });
 		}
@@ -261,13 +252,10 @@ namespace circularLinkedList {
 		display::addLayer(layer);
 		ord.push_back(-1);
 
-		list.push_back(0);
-		for (int i = (int)list.size() - 1; i > pos; --i)
-			list[i] = list[i - 1];
-		list[pos] = val;
+		list.ins(pos, val);
 
 		Layer layer1;
-		layer1.addCLinkedList(list);
+		layer1.addCLinkedList(list.getValues());
 		layer1.addTextAbove("head", layer1.list[0], { -30, -30 });
 
 		Layer layerTrans = layer1;
@@ -325,7 +313,7 @@ namespace circularLinkedList {
 		std::vector<int> ord;
 		Layer layer;
 
-		layer.addCLinkedList(list);
+		layer.addCLinkedList(list.getValues());
 		layer.addTextAbove("head", layer.list[0], { -30, -30 });
 
 		display::addLayer(layer);
@@ -371,11 +359,10 @@ namespace circularLinkedList {
 
 		int n = (int)list.size();
 		for (int i = 0; i < n - 1; ++i) {
-			list[i] = list[i + 1];
 			layer.list[i] = layer.list[i + 1];
 			layer.arrow[i] = layer.arrow[i + 1];
 		}
-		list.pop_back();
+		list.del(0);
 		layer.list.pop_back();
 		layer.text.pop_back();
 		layer.arrow.pop_back();
@@ -383,7 +370,7 @@ namespace circularLinkedList {
 		ord.push_back(-1);
 
 		Layer layer1;
-		layer1.addCLinkedList(list);
+		layer1.addCLinkedList(list.getValues());
 		layer1.addTextAbove("head", layer1.list[0], { -30, -30 });
 
 		Layer layerTrans = layer1;
@@ -434,7 +421,7 @@ namespace circularLinkedList {
 
 		if (list.empty() || pos >= list.size()) {
 			Layer layer;
-			layer.addCLinkedList(list);
+			layer.addCLinkedList(list.getValues());
 			if (list.size()) {
 				layer.addTextAbove("head", layer.list[0], { -30, -30 });
 			}
@@ -449,7 +436,7 @@ namespace circularLinkedList {
 		Layer layer;
 		std::vector<int> ord;
 
-		layer.addCLinkedList(list);
+		layer.addCLinkedList(list.getValues());
 		layer.addTextAbove("head", layer.list[0], { -30, -30 });
 		;
 		display::addLayer(layer);
@@ -504,12 +491,10 @@ namespace circularLinkedList {
 		display::addLayer(layer);
 		ord.push_back(-1);
 
-		for (int i = cur + 1; i < (int)list.size() - 1; ++i)
-			list[i] = list[i + 1];
-		list.pop_back();
+		list.del(cur + 1);
 
 		Layer layer1;
-		layer1.addCLinkedList(list);
+		layer1.addCLinkedList(list.getValues());
 		layer1.addTextAbove("head", layer1.list[0], { -30, -30 });
 
 		Layer layerTrans = layer1;
@@ -531,7 +516,7 @@ namespace circularLinkedList {
 		}
 
 		layer.clear();
-		layer.addCLinkedList(list);
+		layer.addCLinkedList(list.getValues());
 		layer.addTextAbove("head", layer.list[0], { -30, -30 });
 		;
 		display::addLayer(layer);
@@ -557,7 +542,7 @@ namespace circularLinkedList {
 		std::vector<int> ord;
 
 		Layer layer;
-		layer.addCLinkedList(list);
+		layer.addCLinkedList(list.getValues());
 		if (!list.empty()) layer.addTextAbove("head", layer.list[0], { -30, -30 });
 		
 		display::addLayer(layer);
@@ -579,7 +564,8 @@ namespace circularLinkedList {
 		int cur = 0;
 		layer.addTextAbove("cur", layer.list[0], { 0, 50 });
 
-		while (cur < (int)list.size() - 1 && list[cur] != x) {
+		std::vector<int> vlist = list.getValues();
+		while (cur < (int)list.size() - 1 && vlist[cur] != x) {
 			layer.list[cur].beTarget();
 			for (int i = 2; i < 4; ++i) {
 				if (i != 2 && cur < (int)layer.list.size() - 1) layer.list[cur + 1].beVisited();
@@ -600,7 +586,7 @@ namespace circularLinkedList {
 		for (int i = 2; i <= 4; i += 2) {
 			display::addLayer(layer);
 			ord.push_back(i);
-			if (list[cur] != x) layer.list[cur].setColor(style::denied);
+			if (vlist[cur] != x) layer.list[cur].setColor(style::denied);
 		}
 
 		if (cur < list.size()) {
@@ -630,7 +616,7 @@ namespace circularLinkedList {
 		std::vector<int> ord;
 
 		Layer layer;
-		layer.addCLinkedList(list);
+		layer.addCLinkedList(list.getValues());
 		if (!list.empty()) layer.addTextAbove("head", layer.list[0], { -30, -30 });
 		display::addLayer(layer);
 		ord.push_back(-1);
@@ -666,9 +652,9 @@ namespace circularLinkedList {
 			ord.push_back(i);
 		}
 
-		list[pos] = val;
+		list.upd(pos, val);
 		layer.clear();
-		layer.addCLinkedList(list);
+		layer.addCLinkedList(list.getValues());
 		if (!list.empty()) layer.addTextAbove("head", layer.list[0], { -30, -30 });
 
 		display::addLayer(layer);
@@ -703,5 +689,13 @@ namespace circularLinkedList {
 		if (search.functionButton.isPressed() || search.functionButton.isFocused()) search.draw(window);
 
 		display::draw(window);
+		if (!list.empty() && display::layers.empty()) {
+			Layer layer;
+			layer.addCLinkedList(list.getValues());
+			layer.addTextAbove("head", layer.list[0], { -30, -30 });
+			display::addLayer(layer);
+			display::addSourceOrder({ -1 });
+			display::start();
+		}
 	}
 }

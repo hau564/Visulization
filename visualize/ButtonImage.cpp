@@ -21,10 +21,10 @@ void ButtonImage::create(sf::Vector2f _pos, sf::Vector2f _size, const std::vecto
 		col.r = std::min(255, col.r + 50);
 		col.g = std::min(255, col.g + 50);
 		col.b = std::min(255, col.b + 50);
-		bound.setPosition(pos);
-		bound.setSize(size);
-		bound.setFillColor(col);
 	}
+	bound.setPosition(pos);
+	bound.setSize(size);
+	bound.setFillColor(col);
 
 	state = normal;
 	mode = _mode;

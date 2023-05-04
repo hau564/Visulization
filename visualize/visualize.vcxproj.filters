@@ -43,6 +43,12 @@
     <Filter Include="Source Files\DisplayElementsFuntion">
       <UniqueIdentifier>{2e66350f-fac1-4bed-b327-02d08dc57d01}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\InternalStruct">
+      <UniqueIdentifier>{19dd86b0-8280-478a-a2c8-fc7abb61dd12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\InternalStructsFunction">
+      <UniqueIdentifier>{d6e8e21a-3644-4b7a-8999-f29979ccce51}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -120,12 +126,6 @@
     <ClCompile Include="Animation.cpp">
       <Filter>Source Files\InternalToolsFunction</Filter>
     </ClCompile>
-    <ClCompile Include="Queue.cpp">
-      <Filter>Source Files\StructsFunction</Filter>
-    </ClCompile>
-    <ClCompile Include="Stack.cpp">
-      <Filter>Source Files\StructsFunction</Filter>
-    </ClCompile>
     <ClCompile Include="DLinkedList.cpp">
       <Filter>Source Files\StructsFunction</Filter>
     </ClCompile>
@@ -145,7 +145,16 @@
       <Filter>Source Files\ToolsFunction</Filter>
     </ClCompile>
     <ClCompile Include="MyLL.cpp">
-      <Filter>Source Files\StructsFunction</Filter>
+      <Filter>Source Files\InternalStructsFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="MyDLL.cpp">
+      <Filter>Source Files\InternalStructsFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="Queue.cpp">
+      <Filter>Source Files\InternalStructsFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="Stack.cpp">
+      <Filter>Source Files\InternalStructsFunction</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -242,17 +251,20 @@
     <ClInclude Include="LoadFile.h">
       <Filter>Header Files\Tools</Filter>
     </ClInclude>
-    <ClInclude Include="MyStack.h">
-      <Filter>Header Files\Structs</Filter>
+    <ClInclude Include="MyLL.h">
+      <Filter>Header Files\InternalStruct</Filter>
     </ClInclude>
     <ClInclude Include="Node.h">
-      <Filter>Header Files\Structs</Filter>
+      <Filter>Header Files\InternalStruct</Filter>
+    </ClInclude>
+    <ClInclude Include="MyStack.h">
+      <Filter>Header Files\InternalStruct</Filter>
     </ClInclude>
     <ClInclude Include="MyQueue.h">
-      <Filter>Header Files\Structs</Filter>
+      <Filter>Header Files\InternalStruct</Filter>
     </ClInclude>
-    <ClInclude Include="MyLL.h">
-      <Filter>Header Files\Structs</Filter>
+    <ClInclude Include="MyDLL.h">
+      <Filter>Header Files\InternalStruct</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

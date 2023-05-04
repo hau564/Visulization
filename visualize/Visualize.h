@@ -40,3 +40,5 @@
 #include "MyStack.h"
 #include "MyQueue.h"
 #include "MyLL.h"
+#include "MyDLL.h"
+#include "Node.h"

@@ -26,6 +26,52 @@ void Function::create(sf::Vector2f pos, sf::Vector2f size, std::string label, st
 	}
 }
 
+void randArray(std::string& size, std::string& values) {
+	std::vector<int> a;
+	format::toVectorInt(values, a);
+	int n = a.size();
+	if (size == "") {
+		if (values == "") size = format::toString(rand() % 11);
+		else size = format::toString(n);
+	}
+	int m;
+	format::toInt(size, m);
+	if (n != m) {
+		values = "";
+		for (int i = 1; i <= m; ++i) {
+			values += format::toString(rand() % 100);
+			if (i < m) values += ",";
+		}
+	}
+}
+
+void randCapArray(std::string& cap, std::string& size, std::string& values) {
+	int n; format::toInt(size, n);
+	int c; format::toInt(cap, c);
+	if (cap == "") {
+		if (size == "") {
+			randArray(size, values);
+		}
+		format::toInt(size, n);
+		cap = format::toString(n + rand() % 6);
+	}
+	else {
+		if (size == "") size = format::toString(rand() % (c + 1));
+		randArray(size, values);
+	}
+}
+
+void randPos(std::string& pos) {
+	if (pos == "") pos = format::toString(rand() % 11);
+}
+void randVal(std::string& val) {
+	if (val == "") val = format::toString(rand() % 100);
+}
+void randPosVal(std::string& pos, std::string& val) {
+	if (pos == "") pos = format::toString(rand() % 11);
+	if (val == "") val = format::toString(rand() % 100);
+}
+
 bool Function::run(sf::RenderWindow& window, sf::Event event, std::vector<std::string>& get)
 {
 	if (active || functionButton.run(window, event) == Button::pressed) {
@@ -43,6 +89,13 @@ bool Function::run(sf::RenderWindow& window, sf::Event event, std::vector<std::s
 		}
 		int filled = 1;
 		for (Textbox& t : textboxes) filled &= (t.inputString != "");
+		if (textboxes.size() && std::string(textboxes.back().guideText.getString()).substr(0, 6) == "Values") {
+			format::format(textboxes.end()[-2].inputString);
+			textboxes.end()[-2].applyText();
+			format::format(textboxes.back().inputString);
+			textboxes.back().applyText();
+			if (textboxes.end()[-2].inputString == "0" && textboxes.back().inputString == "") filled = 1;
+		}
 		
 		if (textboxes.size()) {
 			if (filled) {
@@ -67,21 +120,16 @@ bool Function::run(sf::RenderWindow& window, sf::Event event, std::vector<std::s
 					return true;
 				}
 				else {
-					for (Textbox& t : textboxes) if (t.inputString == "") {
-						t.inputString = format::toString(rand() % 15);
-						t.applyText();
+					for (Textbox& t : textboxes) format::format(t.inputString);
+					if (textboxes[0].guideText.getString() == "Size: ") randArray(textboxes[0].inputString, textboxes[1].inputString);
+					if (textboxes[0].guideText.getString() == "Capacity: ") randCapArray(textboxes[0].inputString, textboxes[1].inputString, textboxes[2].inputString);
+					if (textboxes[0].guideText.getString() == "Pos: ") {
+						if (textboxes.size() == 1) randPos(textboxes[0].inputString);
+						else randPosVal(textboxes[0].inputString, textboxes[1].inputString);
 					}
-					if (std::string(textboxes.back().guideText.getString()).substr(0, 6) == "Values") {
-						int n;
-						format::toInt(textboxes[0].inputString, n);
-						std::string s = "";
-						for (int i = 1; i <= n; ++i) {
-							s += format::toString(rand() % 100);
-							if (i < n) s += ",";
-						}
-						textboxes.back().inputString = s;
-						textboxes.back().applyText();
-					}
+					if (textboxes[0].guideText.getString() == "First of: ") randVal(textboxes[0].inputString);
+					if (textboxes[0].guideText.getString() == "Value: ") randVal(textboxes[0].inputString);
+					for (Textbox& t : textboxes) t.applyText();
 					return false;
 				}
 			}

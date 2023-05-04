@@ -100,7 +100,8 @@ namespace setting {
         reset.create({ length + 2 * lr, 1.f * py }, { length, 1.f * blockHeight }, style::button::defaultButton::faces, "Reset default", 0, 30);
         
         py = down + 8 * (blockHeight + down);
-        apply.create({ 1.f * lr, 1.f * py }, { 1.f * Width - 2 * lr, 1.f * blockHeight }, style::button::defaultButton::faces, "Delete visualize data and apply changes", 0, 30);
+        float bLength = 1.f * Width - 2.f * lr;
+        apply.create({ 1.f * lr , 1.f * py }, { bLength, 1.f * blockHeight }, style::button::defaultButton::faces, "Apply changes", 0, 30);
 
         dark.text.setFillColor(sf::Color::Black);
         reset.text.setFillColor(sf::Color::Black);

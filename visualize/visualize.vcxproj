@@ -163,6 +163,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MenuBar.cpp" />
     <ClCompile Include="MousePos.cpp" />
+    <ClCompile Include="MyDLL.cpp" />
     <ClCompile Include="MyLL.cpp" />
     <ClCompile Include="Queue.cpp" />
     <ClCompile Include="Setting.cpp" />
@@ -189,6 +190,7 @@
     <ClInclude Include="Function.h" />
     <ClInclude Include="Display.h" />
     <ClInclude Include="ArrayNode.h" />
+    <ClInclude Include="MyDLL.h" />
     <ClInclude Include="MyLL.h" />
     <ClInclude Include="MyQueue.h" />
     <ClInclude Include="Node.h" />
