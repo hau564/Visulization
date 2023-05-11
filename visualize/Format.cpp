@@ -16,7 +16,10 @@ namespace format {
 		for (char c : s) 
 			if (c < '0' || c > '9') return false;
 
-		for (char c : s) x = x * 10 + c - '0';
+		for (char c : s) {
+			x = x * 10 + c - '0';
+			if (x > 100) return false;
+		}
 		return true;
 	}
 
@@ -33,6 +36,7 @@ namespace format {
 		for (char c : s) {
 			if (c == ',') arr.push_back(0);
 			else (arr.back() *= 10) += c - '0';
+			if (arr.back() > 100) return false;
 		}
 		return true;
 	}

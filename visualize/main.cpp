@@ -108,8 +108,14 @@ int main()
     setting::init();
     style::refresh();
     initVariables();
-
     
+    sf::Color col = style::backgroundColor;
+    if (col.r + col.g + col.b <= 100) {
+        col.r = std::min(255, col.r + 50);
+        col.g = std::min(255, col.g + 50);
+        col.b = std::min(255, col.b + 50);
+    }
+    setting::settingButton.bound.setFillColor(col);
 
     std::string cStruct = "";
     while (window.isOpen()) {
